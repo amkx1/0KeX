@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post - 0KeX</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cyber-pink: #ff006e;
+      --cyber-blue: #00f5ff;
+      --cyber-purple: #d946ef;
+      --cyber-orange: #ff4500;
+      --dark-bg: #000000;
+      --dark-card: #0d0d1a;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    nav {
+      background: rgba(13, 13, 26, 0.9);
+      backdrop-filter: blur(15px);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--cyber-pink);
+      box-shadow: 0 5px 30px rgba(255, 0, 110, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      color: var(--cyber-pink);
+      font-weight: 900;
+      text-decoration: none;
+      text-shadow: 0 0 20px var(--cyber-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--cyber-blue);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 0.7rem 1.5rem;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      border: 2px solid var(--cyber-pink);
+      box-shadow: 0 0 20px var(--cyber-pink);
+      color: var(--cyber-pink);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--cyber-blue);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--cyber-pink);
+      transform: translateX(-5px);
+    }
+
+    .blog-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--cyber-purple);
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--cyber-blue);
+    }
+
+    .blog-category {
+      background: var(--dark-card);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--cyber-purple);
+      border-radius: 5px;
+    }
+
+    .blog-title {
+      font-size: 3rem;
+      color: var(--cyber-pink);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+    }
+
+    .blog-tags {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: linear-gradient(135deg, var(--dark-card), rgba(0, 245, 255, 0.1));
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--cyber-blue);
+      border-radius: 5px;
+      font-size: 0.9rem;
+      color: var(--cyber-blue);
+    }
+
+    .blog-content {
+      font-size: 1.1rem;
+      line-height: 2;
+      color: #e0e0e0;
+    }
+
+    .blog-content h2 {
+      color: var(--cyber-pink);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .blog-content h3 {
+      color: var(--cyber-blue);
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.5rem;
+    }
+
+    .blog-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-content code {
+      background: var(--dark-card);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      color: var(--cyber-blue);
+      font-family: 'Courier New', monospace;
+    }
+
+    .blog-content pre {
+      background: var(--dark-card);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid var(--cyber-purple);
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+
+    .blog-content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem;
+      background: linear-gradient(180deg, transparent, var(--dark-card));
+      border-top: 2px solid var(--cyber-pink);
+      color: #888;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .blog-title {
+        font-size: 2rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <nav>
+    <a href="main.html" class="nav-brand">0KeX</a>
+    <div class="nav-links">
+      <a href="main.html#about">About</a>
+      <a href="blogs.html">All Blogs</a>
+      <a href="main.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="blogs.html" class="back-link">← Back to all blogs</a>
+    
+    <div class="blog-header">
+      <div class="blog-meta">
+        <span id="blogDate"></span>
+        <span class="blog-category" id="blogCategory"></span>
+      </div>
+      <h1 class="blog-title" id="blogTitle"></h1>
+      <div class="blog-tags" id="blogTags"></div>
+    </div>
+
+    <div class="blog-content" id="blogContent"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 0KeX. Stay curious.</p>
+  </footer>
+
+  <script>
+    async function loadBlog() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const blogId = parseInt(urlParams.get('id'));
+
+      try {
+        const response = await fetch('blogs.json');
+        const data = await response.json();
+        const blog = data.blogs.find(b => b.id === blogId);
+
+        if (blog) {
+          document.getElementById('blogDate').textContent = blog.date;
+          document.getElementById('blogCategory').textContent = blog.category;
+          document.getElementById('blogTitle').textContent = blog.title;
+          document.getElementById('blogContent').innerHTML = blog.content;
+          document.title = `${blog.title} - 0KeX`;
+
+          const tagsContainer = document.getElementById('blogTags');
+          blog.tags.forEach(tag => {
+            const tagEl = document.createElement('span');
+            tagEl.className = 'tag';
+            tagEl.textContent = tag;
+            tagsContainer.appendChild(tagEl);
+          });
+        } else {
+          document.getElementById('blogContent').innerHTML = '<p>Blog post not found.</p>';
+        }
+      } catch (error) {
+        console.error('Error loading blog:', error);
+        document.getElementById('blogContent').innerHTML = '<p>Error loading blog post.</p>';
+      }
+    }
+
+    loadBlog();
+  </script>
+</body>
+</html>
