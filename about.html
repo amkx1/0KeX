@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - OKeX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Graphics - Glitchy Vibe */
+        .bg-graphics {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 0, 255, 0.05);
+            animation: glitchFloat 8s infinite ease-in-out;
+            filter: blur(2px);
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -5%;
+            animation-delay: 3s;
+            background: rgba(0, 255, 255, 0.04);
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .bg-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.15), transparent);
+            height: 2px;
+            width: 100%;
+            animation: glitchSlide 10s infinite linear;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+
+        .bg-line:nth-child(4) {
+            top: 25%;
+            animation-delay: 0s;
+        }
+
+        .bg-line:nth-child(5) {
+            top: 55%;
+            animation-delay: 5s;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Glitch rectangles */
+        .glitch-box {
+            position: absolute;
+            background: rgba(255, 0, 255, 0.08);
+            animation: glitchBox 5s infinite;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+
+        .glitch-box:nth-child(6) {
+            width: 150px;
+            height: 100px;
+            top: 40%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .glitch-box:nth-child(7) {
+            width: 100px;
+            height: 150px;
+            top: 70%;
+            left: 10%;
+            animation-delay: 3.5s;
+            background: rgba(0, 255, 255, 0.06);
+            border-color: rgba(0, 255, 255, 0.2);
+        }
+
+        @keyframes glitchFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+            25% {
+                transform: translate(20px, -20px) scale(1.1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-15px, 15px) scale(0.9);
+                opacity: 0.3;
+            }
+            51% {
+                transform: translate(-15px, 25px) scale(0.9);
+            }
+            52% {
+                transform: translate(-10px, 15px) scale(0.9);
+            }
+            75% {
+                transform: translate(10px, -30px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes glitchSlide {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            48% {
+                transform: translateX(50%);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(50%) translateY(-5px);
+                opacity: 0.5;
+            }
+            52% {
+                transform: translateX(50%) translateY(5px);
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(200%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glitchBox {
+            0%, 90% {
+                transform: translate(0, 0) skew(0deg);
+                opacity: 0;
+            }
+            91% {
+                opacity: 0.8;
+                transform: translate(5px, 0) skew(2deg);
+            }
+            92% {
+                transform: translate(-5px, 0) skew(-2deg);
+            }
+            93% {
+                transform: translate(3px, 2px) skew(1deg);
+            }
+            94%, 100% {
+                opacity: 0;
+                transform: translate(0, 0) skew(0deg);
+            }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 11, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff00ff;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* About Hero */
+        .about-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .about-hero h1 {
+            font-size: 4rem;
+            color: #ff00ff;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            color: #b366ff;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Content Sections */
+        .about-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::before {
+            content: '---';
+            color: #ff00ff;
+            margin-right: 1rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .content-block {
+            background: rgba(45, 27, 78, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            padding: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: #ff00ff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .content-block p {
+            color: #c0c0c0;
+            margin-bottom: 1rem;
+        }
+
+        .content-block ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-block li {
+            color: #c0c0c0;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .content-block li::before {
+            content: '▹';
+            color: #ff00ff;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Full Width Section */
+        .full-width-section {
+            background: rgba(45, 27, 78, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .full-width-section h3 {
+            color: #ff00ff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .full-width-section p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(255, 0, 255, 0.3);
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: #ff00ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .timeline-item h4 {
+            color: #ff00ff;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .timeline-item span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .timeline-item p {
+            color: #c0c0c0;
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(45, 27, 78, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 0, 255, 0.5);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: #ff00ff;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #c0c0c0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Graphics -->
+    <div class="bg-graphics">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-line"></div>
+        <div class="bg-line"></div>
+        <div class="glitch-box"></div>
+        <div class="glitch-box"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">ØKEX</a>
+        <nav>
+            <a href="index.html">-home</a>
+            <a href="about.html" class="active">-about</a>
+            <a href="projects.html">-projects</a>
+            <a href="blogs.html">-blog</a>
+            <a href="contact.html">-contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- About Hero -->
+            <section class="about-hero">
+                <div>
+                    <h1>ABOUT ME</h1>
+                    <p>Hello there! I'm a cybersecurity enthusiast eager to understand the fundamentals of breaking and securing systems.</p>
+                </div>
+            </section>
+
+            <!-- Who I Am Section -->
+            <section class="about-section">
+                <h2 class="section-title">WHO AM I</h2>
+                <div class="content-grid">
+                    <div class="content-block">
+                        <h3>The Journey</h3>
+                        <p>My fascination with cybersecurity started with a simple question: "How does this actually work?" That curiosity led me down a path of exploration, from understanding basic network protocols to diving deep into exploitation techniques.</p>
+                        <p>I believe the best way to secure a system is to understand how it can be broken. This mindset drives my approach to learning and building.</p>
+                    </div>
+                    <div class="content-block">
+                        <h3>The Philosophy</h3>
+                        <p>Security isn't just about finding vulnerabilities—it's about understanding the entire ecosystem. Every system has its weak points, and discovering them requires patience, creativity, and a willingness to see things differently.</p>
+                        <p>I'm constantly learning, constantly breaking things (in controlled environments), and constantly asking "what if?"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What I Do Section -->
+            <section class="about-section">
+                <h2 class="section-title">WHAT I DO</h2>
+                <div class="full-width-section">
+                    <h3>Areas of Focus</h3>
+                    <p>My work spans multiple domains within cybersecurity, each offering unique challenges and learning opportunities. I approach each area with the same curiosity that got me started in this field.</p>
+                    
+                    <div class="content-grid" style="margin-top: 2rem;">
+                        <div class="content-block">
+                            <h3>Offensive Security</h3>
+                            <ul>
+                                <li>Web application security testing</li>
+                                <li>Network reconnaissance and enumeration</li>
+                                <li>Vulnerability analysis and exploitation</li>
+                                <li>CTF-based attack simulations</li>
+                            </ul>
+                        </div>
+                        <div class="content-block">
+                            <h3>Defensive Security</h3>
+                            <ul>
+                                <li>Secure backend and API practices</li>
+                                <li>Threat detection and log analysis</li>
+                                <li>System and network hardening basics</li>
+                                <li>Understanding attack mitigation techniques</li>
+                            </ul>
+                        </div>
+                        <div class="content-block">
+                            <h3>Research & Learning</h3>
+                            <ul>
+                                <li>Reverse engineering fundamentals</li>
+                                <li>Malware analysis and detection</li>
+                                <li>Security tool scripting and development</li>
+                                <li>CTF competitions and writeups</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section class="about-section">
+                <h2 class="section-title">CORE VALUES</h2>
+                <div class="content-grid">
+                    <div class="content-block">
+                        <h3>Ethical Practice</h3>
+                        <p>All security research and testing is conducted ethically and legally. I believe in responsible disclosure and using knowledge to build, not destroy.</p>
+                    </div>
+                    <div class="content-block">
+                        <h3>Continuous Learning</h3>
+                        <p>The security landscape evolves daily. Staying curious and committed to learning is not optional—it's essential.</p>
+                    </div>
+                    <div class="content-block">
+                        <h3>Community Contribution</h3>
+                        <p>Sharing knowledge through writeups, blogs, and open-source tools helps the entire community grow stronger.</p>
+                    </div>
+                    <div class="content-block">
+                        <h3>Question Everything</h3>
+                        <p>Every system can be improved. Every assumption can be challenged. This mindset drives innovation in security.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 0KeX. Stay curious.</p>
+    </footer>
+</body>
+</html>

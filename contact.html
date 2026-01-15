@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post - OKeX</title>
+    <title>Contact - OKeX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -232,150 +233,155 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 5%;
         }
 
-        /* Back Link */
-        .back-link {
-            display: inline-block;
+        /* Contact Hero */
+        .contact-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact-hero h1 {
+            font-size: 4rem;
             color: #ff00ff;
-            text-decoration: none;
-            margin: 2rem 0;
-            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        .contact-hero p {
+            font-size: 1.3rem;
+            color: #b366ff;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: rgba(45, 27, 78, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            padding: 2.5rem;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .back-link:hover {
-            color: #b366ff;
-            transform: translateX(-5px);
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 0, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.2);
         }
 
-        /* Blog Header */
-        .blog-header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #ff00ff;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .blog-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+        .contact-card:hover::before {
+            opacity: 1;
         }
 
-        .blog-date {
-            color: #b366ff;
-        }
-
-        .blog-category {
-            padding: 0.3rem 1rem;
-            background: rgba(255, 0, 255, 0.1);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            color: #ff00ff;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .blog-title {
+        .contact-icon {
             font-size: 3rem;
-            color: #ff00ff;
             margin-bottom: 1.5rem;
-            font-weight: 300;
-            line-height: 1.2;
-        }
-
-        .blog-tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 0.4rem 1rem;
-            background: rgba(45, 27, 78, 0.5);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            color: #b366ff;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Blog Content */
-        .blog-content {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: #c0c0c0;
-            padding-bottom: 4rem;
-        }
-
-        .blog-content h2 {
+            display: block;
             color: #ff00ff;
-            margin-top: 2.5rem;
-            margin-bottom: 1.2rem;
-            font-size: 2rem;
+        }
+
+        .contact-card h3 {
+            color: #ff00ff;
+            font-size: 1.5rem;
             font-weight: 300;
+            margin-bottom: 0.8rem;
             letter-spacing: 1px;
         }
 
-        .blog-content h3 {
+        .contact-card .handle {
             color: #b366ff;
-            margin-top: 2rem;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
-            font-weight: 300;
+            display: block;
         }
 
-        .blog-content p {
+        .contact-card p {
+            color: #c0c0c0;
+            line-height: 1.6;
             margin-bottom: 1.5rem;
         }
 
-        .blog-content code {
-            background: rgba(45, 27, 78, 0.5);
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            color: #00ffff;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .blog-content pre {
-            background: rgba(45, 27, 78, 0.5);
-            padding: 1.5rem;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-
-        .blog-content pre code {
-            background: none;
-            padding: 0;
-            color: #e0e0e0;
-        }
-
-        .blog-content ul,
-        .blog-content ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .blog-content li {
-            margin-bottom: 0.8rem;
-        }
-
-        .blog-content a {
+        .contact-link {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            border: 1px solid #ff00ff;
             color: #ff00ff;
             text-decoration: none;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.3);
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
         }
 
-        .blog-content a:hover {
+        .contact-link:hover {
+            background: #ff00ff;
+            color: #1a0b2e;
+        }
+
+        /* Email Section */
+        .email-section {
+            text-align: center;
+            padding: 4rem 3rem;
+            background: rgba(45, 27, 78, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            margin: 4rem 0;
+        }
+
+        .email-section h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .email-section p {
+            color: #c0c0c0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .email-link {
+            font-size: 1.8rem;
+            color: #ff00ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .email-link:hover {
             color: #b366ff;
-            border-bottom-color: #b366ff;
+            transform: scale(1.05);
         }
 
         /* Footer */
@@ -385,29 +391,28 @@
             color: #888;
             font-size: 0.9rem;
             margin-top: 4rem;
-            border-top: 1px solid rgba(255, 0, 255, 0.2);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .blog-title {
-                font-size: 2rem;
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
 
             nav {
                 gap: 1rem;
             }
 
-            .blog-content {
-                font-size: 1rem;
+            .email-section h2 {
+                font-size: 1.8rem;
             }
 
-            .blog-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .blog-content h3 {
-                font-size: 1.2rem;
+            .email-link {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -431,68 +436,81 @@
             <a href="index.html">-home</a>
             <a href="about.html">-about</a>
             <a href="projects.html">-projects</a>
-            <a href="blogs.html" class="active">-blog</a>
-            <a href="contact.html">-contact</a>
+            <a href="blogs.html">-blog</a>
+            <a href="contact.html" class="active">-contact</a>
         </nav>
     </header>
 
     <!-- Main Content -->
     <main>
         <div class="container">
-            <a href="blogs.html" class="back-link">← Back to all blogs</a>
-            
-            <div class="blog-header">
-                <div class="blog-meta">
-                    <span class="blog-date" id="blogDate"></span>
-                    <span class="blog-category" id="blogCategory"></span>
+            <!-- Contact Hero -->
+            <section class="contact-hero">
+                <div>
+                    <h1>LET'S CONNECT</h1>
+                    <p>Find me across the web. I'm always open to collaborating, learning, discussing security or even just a chat!</p>
                 </div>
-                <h1 class="blog-title" id="blogTitle"></h1>
-                <div class="blog-tags" id="blogTags"></div>
-            </div>
+            </section>
 
-            <div class="blog-content" id="blogContent"></div>
+            <!-- Email Section -->
+            <section class="email-section">
+                <h2>Drop me an email</h2>
+                <p>For inquiries, collaborations, or just to say hi</p>
+                <a href="" class="email-link">...</a>
+            </section>
+
+            <!-- Social & Platform Links -->
+            <section class="contact-grid">
+                <!-- GitHub -->
+                <div class="contact-card">
+                    <i class="fab fa-github contact-icon"></i>
+                    <h3>GitHub</h3>
+                    <span class="handle">@amkx1</span>
+                    <p>Check out my projects, tools, and contributions to open-source security projects.</p>
+                    <a href="https://github.com/amkx1" target="_blank" class="contact-link">Visit Profile</a>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="contact-card">
+                    <i class="fab fa-linkedin contact-icon"></i>
+                    <h3>LinkedIn</h3>
+                    <p>Let's connect professionally. Open to networking and career opportunities.</p>
+                    <a href="https://linkedin.com/in/ankita-m-kumar-b6a624327" target="_blank" class="contact-link">Connect</a>
+                </div>
+
+                <!-- X (Twitter) -->
+                <div class="contact-card">
+                    <i class="fab fa-x-twitter contact-icon"></i>
+                    <h3>X (Twitter)</h3>
+                    <p>Hit me with a follow!</p>
+                    <a href="https://x.com/ankita01mk" target="_blank" class="contact-link">Follow</a>
+                </div>
+
+                <!-- Discord -->
+                <div class="contact-card">
+                    <i class="fab fa-discord contact-icon"></i>
+                    <h3>Discord</h3>
+                    <span class="handle">@kexilie</span>
+                    <p>Let's security discussions and CTF collaborations. Always up for a chat.</p>
+                    <a href="https://discord.com/users/kexilie" target="_blank" class="contact-link">Message</a>
+                </div>
+
+                <!-- TryHackMe -->
+                <div class="contact-card">
+                    <i class="fas fa-crosshairs contact-icon"></i>
+                    <h3>TryHackMe</h3>
+                    <span class="handle">@0KeX</span>
+                    <p>Track my progress through rooms and challenges. I'm always evolving.</p>
+                    <a href="https://tryhackme.com/p/0KeX" target="_blank" class="contact-link">View Profile</a>
+                </div>
+
+            </section>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 OKeX. Stay curious.</p>
+        <p>© 2025 0KeX. Stay curious.</p>
     </footer>
-
-    <script>
-        async function loadBlog() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const blogId = parseInt(urlParams.get('id'));
-
-            try {
-                const response = await fetch('blogs.json');
-                const data = await response.json();
-                const blog = data.blogs.find(b => b.id === blogId);
-
-                if (blog) {
-                    document.getElementById('blogDate').textContent = blog.date;
-                    document.getElementById('blogCategory').textContent = blog.category;
-                    document.getElementById('blogTitle').textContent = blog.title;
-                    document.getElementById('blogContent').innerHTML = blog.content;
-                    document.title = `${blog.title} - OKeX`;
-
-                    const tagsContainer = document.getElementById('blogTags');
-                    blog.tags.forEach(tag => {
-                        const tagEl = document.createElement('span');
-                        tagEl.className = 'tag';
-                        tagEl.textContent = tag;
-                        tagsContainer.appendChild(tagEl);
-                    });
-                } else {
-                    document.getElementById('blogContent').innerHTML = '<p>Blog post not found.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading blog:', error);
-                document.getElementById('blogContent').innerHTML = '<p>Error loading blog post.</p>';
-            }
-        }
-
-        loadBlog();
-    </script>
 </body>
 </html>
