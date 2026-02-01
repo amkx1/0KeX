@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - OKeX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>About - 0KeX</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +15,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0f 50%, #0a0a0a 100%);
+            color: #e8e8e8;
             overflow-x: hidden;
         }
 
@@ -33,7 +35,7 @@
         .bg-circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 0, 255, 0.05);
+            background: rgba(220, 53, 69, 0.04);
             animation: glitchFloat 8s infinite ease-in-out;
             filter: blur(2px);
         }
@@ -52,7 +54,7 @@
             top: 60%;
             right: -5%;
             animation-delay: 3s;
-            background: rgba(0, 255, 255, 0.04);
+            background: rgba(255, 105, 120, 0.03);
         }
 
         .bg-circle:nth-child(3) {
@@ -65,11 +67,11 @@
 
         .bg-line {
             position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(220, 53, 69, 0.12), transparent);
             height: 2px;
             width: 100%;
             animation: glitchSlide 10s infinite linear;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.25);
         }
 
         .bg-line:nth-child(4) {
@@ -80,16 +82,16 @@
         .bg-line:nth-child(5) {
             top: 55%;
             animation-delay: 5s;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            background: linear-gradient(90deg, transparent, rgba(255, 105, 120, 0.12), transparent);
+            box-shadow: 0 0 10px rgba(255, 105, 120, 0.25);
         }
 
         /* Glitch rectangles */
         .glitch-box {
             position: absolute;
-            background: rgba(255, 0, 255, 0.08);
+            background: rgba(220, 53, 69, 0.06);
             animation: glitchBox 5s infinite;
-            border: 1px solid rgba(255, 0, 255, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.15);
         }
 
         .glitch-box:nth-child(6) {
@@ -106,29 +108,36 @@
             top: 70%;
             left: 10%;
             animation-delay: 3.5s;
-            background: rgba(0, 255, 255, 0.06);
-            border-color: rgba(0, 255, 255, 0.2);
+            background: rgba(255, 105, 120, 0.05);
+            border-color: rgba(255, 105, 120, 0.15);
         }
 
         @keyframes glitchFloat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
                 opacity: 0.5;
             }
+
             25% {
                 transform: translate(20px, -20px) scale(1.1);
                 opacity: 0.8;
             }
+
             50% {
                 transform: translate(-15px, 15px) scale(0.9);
                 opacity: 0.3;
             }
+
             51% {
                 transform: translate(-15px, 25px) scale(0.9);
             }
+
             52% {
                 transform: translate(-10px, 15px) scale(0.9);
             }
+
             75% {
                 transform: translate(10px, -30px) scale(1.05);
                 opacity: 0.6;
@@ -140,24 +149,30 @@
                 transform: translateX(-100%);
                 opacity: 0;
             }
+
             5% {
                 opacity: 1;
             }
+
             48% {
                 transform: translateX(50%);
                 opacity: 1;
             }
+
             50% {
                 transform: translateX(50%) translateY(-5px);
                 opacity: 0.5;
             }
+
             52% {
                 transform: translateX(50%) translateY(5px);
                 opacity: 1;
             }
+
             95% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateX(200%);
                 opacity: 0;
@@ -165,21 +180,28 @@
         }
 
         @keyframes glitchBox {
-            0%, 90% {
+
+            0%,
+            90% {
                 transform: translate(0, 0) skew(0deg);
                 opacity: 0;
             }
+
             91% {
                 opacity: 0.8;
                 transform: translate(5px, 0) skew(2deg);
             }
+
             92% {
                 transform: translate(-5px, 0) skew(-2deg);
             }
+
             93% {
                 transform: translate(3px, 2px) skew(1deg);
             }
-            94%, 100% {
+
+            94%,
+            100% {
                 opacity: 0;
                 transform: translate(0, 0) skew(0deg);
             }
@@ -189,15 +211,16 @@
         header {
             position: fixed;
             top: 0;
+            height: 13%;
             width: 100%;
-            background: rgba(26, 11, 46, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.1);
+            border-bottom: 1px solid rgba(220, 53, 69, 0.2);
         }
 
         .logo {
@@ -208,21 +231,204 @@
             text-decoration: none;
         }
 
-        nav {
+        /* Navigation Container */
+        .nav-container {
+            position: relative;
+            height: 100%;
+        }
+
+        /* Navigation Trigger Area */
+        .nav-trigger {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-trigger::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(220, 53, 69, 0.3);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-container:hover .nav-trigger::before {
+            border-color: rgba(220, 53, 69, 0.8);
+            box-shadow: 0 0 15px rgba(220, 53, 69, 0.4), inset 0 0 15px rgba(220, 53, 69, 0.1);
+        }
+
+        .nav-trigger i {
+            font-size: 1.5rem;
+            color: #ff6978;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .nav-container:hover .nav-trigger i {
+            color: #fff;
+            text-shadow: 0 0 10px #ff6978;
+        }
+
+        /* Navigation Menu */
+        nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 1.5rem;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(220, 53, 69, 0.4);
+            border-radius: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(220, 53, 69, 0.3),
+                0 0 0 1px rgba(255, 105, 120, 0.1) inset;
+            min-width: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Tech corner accents */
+        nav::before,
+        nav::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dc3545;
+        }
+
+        nav::before {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        nav::after {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        .nav-container:hover nav {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            animation: navGlitch 0.3s;
+        }
+
+        @keyframes navGlitch {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            20% {
+                transform: translateY(0) translateX(-2px);
+            }
+
+            40% {
+                transform: translateY(0) translateX(2px);
+            }
+
+            60% {
+                transform: translateY(0) translateX(-1px);
+            }
+
+            80% {
+                transform: translateY(0) translateX(1px);
+            }
         }
 
         nav a {
-            color: #e0e0e0;
+            display: block;
+            color: #d0d0d0;
             text-decoration: none;
-            transition: color 0.3s;
+            padding: 1.2rem 1.5rem;
+            transition: all 0.3s;
             font-size: 0.95rem;
+            border-bottom: 1px solid rgba(220, 53, 69, 0.15);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
         }
 
-        nav a:hover,
-        nav a.active {
-            color: #ff00ff;
+        /* Tech line indicator */
+        nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #dc3545, #ff6978);
+            transform: translateX(-3px);
+            transition: transform 0.3s;
+        }
+
+        /* Glitch effect on hover */
+        nav a::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.2rem;
+            color: #dc3545;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        nav a:last-child {
+            border-bottom: none;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background: linear-gradient(90deg, rgba(220, 53, 69, 0.15), transparent);
+            padding-left: 2rem;
+            text-shadow: 0 0 10px rgba(255, 105, 120, 0.5);
+        }
+
+        nav a:hover::before {
+            transform: translateX(0);
+            box-shadow: 0 0 10px #dc3545;
+        }
+
+        nav a:hover::after {
+            opacity: 0.3;
+            animation: textGlitch 0.3s infinite;
+        }
+
+        @keyframes textGlitch {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(-2px, -1px);
+            }
+
+            50% {
+                transform: translate(2px, 1px);
+            }
+
+            75% {
+                transform: translate(-1px, 1px);
+            }
         }
 
         /* Main Content */
@@ -250,15 +456,16 @@
 
         .about-hero h1 {
             font-size: 4rem;
-            color: #ff00ff;
+            color: #ff6978;
             margin-bottom: 1rem;
             font-weight: 300;
             letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(220, 53, 69, 0.3);
         }
 
         .about-hero p {
             font-size: 1.3rem;
-            color: #b366ff;
+            color: #dc3545;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.8;
@@ -279,7 +486,7 @@
 
         .section-title::before {
             content: '---';
-            color: #ff00ff;
+            color: #dc3545;
             margin-right: 1rem;
         }
 
@@ -291,21 +498,28 @@
         }
 
         .content-block {
-            background: rgba(45, 27, 78, 0.3);
-            border: 1px solid rgba(255, 0, 255, 0.2);
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(220, 53, 69, 0.25);
             padding: 2.5rem;
             line-height: 1.8;
+            transition: all 0.3s;
+        }
+
+        .content-block:hover {
+            border-color: rgba(220, 53, 69, 0.6);
+            box-shadow: 0 5px 25px rgba(220, 53, 69, 0.2);
+            background: rgba(20, 20, 20, 0.8);
         }
 
         .content-block h3 {
-            color: #ff00ff;
+            color: #ff6978;
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             font-weight: 300;
         }
 
         .content-block p {
-            color: #c0c0c0;
+            color: #c8c8c8;
             margin-bottom: 1rem;
         }
 
@@ -315,7 +529,7 @@
         }
 
         .content-block li {
-            color: #c0c0c0;
+            color: #c8c8c8;
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
@@ -323,28 +537,35 @@
 
         .content-block li::before {
             content: '▹';
-            color: #ff00ff;
+            color: #dc3545;
             position: absolute;
             left: 0;
         }
 
         /* Full Width Section */
         .full-width-section {
-            background: rgba(45, 27, 78, 0.3);
-            border: 1px solid rgba(255, 0, 255, 0.2);
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(220, 53, 69, 0.25);
             padding: 3rem;
             margin: 3rem 0;
+            transition: all 0.3s;
+        }
+
+        .full-width-section:hover {
+            border-color: rgba(220, 53, 69, 0.6);
+            box-shadow: 0 5px 25px rgba(220, 53, 69, 0.2);
+            background: rgba(20, 20, 20, 0.8);
         }
 
         .full-width-section h3 {
-            color: #ff00ff;
+            color: #ff6978;
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             font-weight: 300;
         }
 
         .full-width-section p {
-            color: #c0c0c0;
+            color: #c8c8c8;
             line-height: 1.8;
             margin-bottom: 1rem;
         }
@@ -353,7 +574,7 @@
         .timeline {
             position: relative;
             padding-left: 2rem;
-            border-left: 2px solid rgba(255, 0, 255, 0.3);
+            border-left: 2px solid rgba(220, 53, 69, 0.3);
         }
 
         .timeline-item {
@@ -368,13 +589,13 @@
             top: 0;
             width: 10px;
             height: 10px;
-            background: #ff00ff;
+            background: #dc3545;
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
         }
 
         .timeline-item h4 {
-            color: #ff00ff;
+            color: #ff6978;
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
             font-weight: 300;
@@ -386,7 +607,7 @@
         }
 
         .timeline-item p {
-            color: #c0c0c0;
+            color: #c8c8c8;
             margin-top: 0.5rem;
             line-height: 1.6;
         }
@@ -402,25 +623,28 @@
         .stat-card {
             text-align: center;
             padding: 2rem;
-            background: rgba(45, 27, 78, 0.3);
-            border: 1px solid rgba(255, 0, 255, 0.2);
-            transition: transform 0.3s;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(220, 53, 69, 0.25);
+            transition: all 0.3s;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 0, 255, 0.5);
+            border-color: rgba(220, 53, 69, 0.6);
+            box-shadow: 0 5px 25px rgba(220, 53, 69, 0.2);
+            background: rgba(20, 20, 20, 0.8);
         }
 
         .stat-number {
             font-size: 3rem;
-            color: #ff00ff;
+            color: #ff6978;
             font-weight: 300;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(220, 53, 69, 0.3);
         }
 
         .stat-label {
-            color: #c0c0c0;
+            color: #c8c8c8;
             font-size: 0.95rem;
         }
 
@@ -454,6 +678,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Background Graphics -->
     <div class="bg-graphics">
@@ -469,13 +694,18 @@
     <!-- Header -->
     <header>
         <a href="index.html" class="logo">ØKEX</a>
-        <nav>
-            <a href="index.html">-home</a>
-            <a href="about.html" class="active">-about</a>
-            <a href="projects.html">-projects</a>
-            <a href="blogs.html">-blog</a>
-            <a href="contact.html">-contact</a>
-        </nav>
+        <div class="nav-container">
+            <div class="nav-trigger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <a href="index.html" data-text="-home">-home</a>
+                <a href="about.html" data-text="-about">-about</a>
+                <a href="projects.html" data-text="-projects">-projects</a>
+                <a href="blogs.html" data-text="-blog">-blog</a>
+                <a href="contact.html" data-text="-contact">-contact</a>
+            </nav>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -485,7 +715,9 @@
             <section class="about-hero">
                 <div>
                     <h1>ABOUT ME</h1>
-                    <p>Hello there! I'm a cybersecurity enthusiast eager to understand the fundamentals of breaking and securing systems.</p>
+                    <p>Hello there! I'm 0KeX or you can just call me Kex(she/her) and I'm a cybersecurity student and an
+                        enthusiast eager to understand the fundamentals of breaking and securing systems. I'm currently
+                        in my second year of university, pursuing my degree in cybersecurity.</p>
                 </div>
             </section>
 
@@ -495,13 +727,19 @@
                 <div class="content-grid">
                     <div class="content-block">
                         <h3>The Journey</h3>
-                        <p>My fascination with cybersecurity started with a simple question: "How does this actually work?" That curiosity led me down a path of exploration, from understanding basic network protocols to diving deep into exploitation techniques.</p>
-                        <p>I believe the best way to secure a system is to understand how it can be broken. This mindset drives my approach to learning and building.</p>
+                        <p>My fascination with cybersecurity started with a simple question: "How does this actually
+                            work?" That curiosity led me down a path of exploration, from understanding basic network
+                            protocols to diving deep into exploitation techniques.</p>
+                        <p>I believe the best way to secure a system is to understand how it can be broken. This mindset
+                            drives my approach to learning and building.</p>
                     </div>
                     <div class="content-block">
                         <h3>The Philosophy</h3>
-                        <p>Security isn't just about finding vulnerabilities—it's about understanding the entire ecosystem. Every system has its weak points, and discovering them requires patience, creativity, and a willingness to see things differently.</p>
-                        <p>I'm constantly learning, constantly breaking things (in controlled environments), and constantly asking "what if?"</p>
+                        <p>Security isn't just about finding vulnerabilities—it's about understanding the entire
+                            ecosystem. Every system has its weak points, and discovering them requires patience,
+                            creativity, and a willingness to see things differently.</p>
+                        <p>I'm constantly learning, constantly breaking things (in controlled environments), and
+                            constantly asking "what if?"</p>
                     </div>
                 </div>
             </section>
@@ -511,8 +749,10 @@
                 <h2 class="section-title">WHAT I DO</h2>
                 <div class="full-width-section">
                     <h3>Areas of Focus</h3>
-                    <p>My work spans multiple domains within cybersecurity, each offering unique challenges and learning opportunities. I approach each area with the same curiosity that got me started in this field.</p>
-                    
+                    <p>My work spans multiple domains within cybersecurity, each offering unique challenges and learning
+                        opportunities. I approach each area with the same curiosity that got me started in this field.
+                    </p>
+
                     <div class="content-grid" style="margin-top: 2rem;">
                         <div class="content-block">
                             <h3>Offensive Security</h3>
@@ -551,19 +791,23 @@
                 <div class="content-grid">
                     <div class="content-block">
                         <h3>Ethical Practice</h3>
-                        <p>All security research and testing is conducted ethically and legally. I believe in responsible disclosure and using knowledge to build, not destroy.</p>
+                        <p>All security research and testing is conducted ethically and legally. I believe in
+                            responsible disclosure and using knowledge to build, not destroy.</p>
                     </div>
                     <div class="content-block">
                         <h3>Continuous Learning</h3>
-                        <p>The security landscape evolves daily. Staying curious and committed to learning is not optional—it's essential.</p>
+                        <p>The security landscape evolves daily. Staying curious and committed to learning is not
+                            optional—it's essential.</p>
                     </div>
                     <div class="content-block">
                         <h3>Community Contribution</h3>
-                        <p>Sharing knowledge through writeups, blogs, and open-source tools helps the entire community grow stronger.</p>
+                        <p>Sharing knowledge through writeups, blogs, and open-source tools helps the entire community
+                            grow stronger.</p>
                     </div>
                     <div class="content-block">
                         <h3>Question Everything</h3>
-                        <p>Every system can be improved. Every assumption can be challenged. This mindset drives innovation in security.</p>
+                        <p>Every system can be improved. Every assumption can be challenged. This mindset drives
+                            innovation in security.</p>
                     </div>
                 </div>
             </section>
@@ -573,7 +817,8 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 0KeX. Stay curious.</p>
+        <p>Copyright © 2026 0KeX. Stay curious.</p>
     </footer>
 </body>
+
 </html>
