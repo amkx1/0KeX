@@ -14,13 +14,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0f 50%, #0a0a0a 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d0d0d;
             color: #e8e8e8;
             overflow-x: hidden;
         }
 
-        /* Animated Background Graphics - Glitchy Vibe */
+        /* Subtle Background Graphics */
         .bg-graphics {
             position: fixed;
             top: 0;
@@ -32,177 +32,130 @@
             overflow: hidden;
         }
 
-        .bg-circle {
+        /* Mesh gradient background */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(220, 53, 69, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 0, 0, 0.06) 0%, transparent 50%);
+        }
+
+        /* Subtle animated orbs */
+        .bg-orb {
             position: absolute;
             border-radius: 50%;
-            background: rgba(220, 53, 69, 0.04);
-            animation: glitchFloat 8s infinite ease-in-out;
-            filter: blur(2px);
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
         }
 
-        .bg-circle:nth-child(1) {
-            width: 300px;
-            height: 300px;
+        .bg-orb:nth-child(2) {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(220, 53, 69, 0.15), transparent 70%);
             top: 10%;
-            left: -10%;
+            right: 10%;
             animation-delay: 0s;
         }
 
-        .bg-circle:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: -5%;
-            animation-delay: 3s;
-            background: rgba(255, 105, 120, 0.03);
-        }
-
-        .bg-circle:nth-child(3) {
-            width: 150px;
-            height: 150px;
+        .bg-orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.12), transparent 70%);
             bottom: 20%;
-            left: 20%;
-            animation-delay: 6s;
+            left: 15%;
+            animation-delay: 10s;
         }
 
-        .bg-line {
+        /* Blob Graphics */
+        .bg-blob {
             position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(220, 53, 69, 0.12), transparent);
-            height: 2px;
-            width: 100%;
-            animation: glitchSlide 10s infinite linear;
-            box-shadow: 0 0 10px rgba(220, 53, 69, 0.25);
+            filter: blur(40px);
+            opacity: 0.5;
+            animation: blobFloat 25s infinite ease-in-out;
         }
 
-        .bg-line:nth-child(4) {
-            top: 25%;
+        .bg-blob:nth-child(4) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(220, 53, 69, 0.35), rgba(220, 53, 69, 0.1) 50%, transparent 70%);
+            top: 50%;
+            right: 5%;
+            border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
             animation-delay: 0s;
         }
 
-        .bg-line:nth-child(5) {
-            top: 55%;
-            animation-delay: 5s;
-            background: linear-gradient(90deg, transparent, rgba(255, 105, 120, 0.12), transparent);
-            box-shadow: 0 0 10px rgba(255, 105, 120, 0.25);
+        .bg-blob:nth-child(5) {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(255, 69, 78, 0.3), rgba(255, 69, 78, 0.08) 50%, transparent 70%);
+            top: 15%;
+            left: 8%;
+            border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
+            animation-delay: 8s;
         }
 
-        .glitch-box {
-            position: absolute;
-            background: rgba(220, 53, 69, 0.06);
-            animation: glitchBox 5s infinite;
-            border: 1px solid rgba(220, 53, 69, 0.15);
+        .bg-blob:nth-child(6) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.32), rgba(139, 0, 0, 0.1) 50%, transparent 70%);
+            bottom: 10%;
+            right: 25%;
+            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+            animation-delay: 15s;
         }
 
-        .glitch-box:nth-child(6) {
-            width: 150px;
-            height: 100px;
-            top: 40%;
-            right: 15%;
-            animation-delay: 1s;
+        .bg-blob:nth-child(7) {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(220, 53, 69, 0.28), rgba(220, 53, 69, 0.08) 50%, transparent 70%);
+            bottom: 35%;
+            left: 3%;
+            border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
+            animation-delay: 20s;
         }
 
-        .glitch-box:nth-child(7) {
-            width: 100px;
-            height: 150px;
-            top: 70%;
-            left: 10%;
-            animation-delay: 3.5s;
-            background: rgba(255, 105, 120, 0.05);
-            border-color: rgba(255, 105, 120, 0.15);
-        }
-
-        @keyframes glitchFloat {
+        @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.5;
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(30px, -30px);
+            }
+
+            66% {
+                transform: translate(-20px, 20px);
+            }
+        }
+
+        @keyframes blobFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
             }
 
             25% {
-                transform: translate(20px, -20px) scale(1.1);
-                opacity: 0.8;
+                transform: translate(30px, -40px) rotate(90deg);
+                border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%;
             }
 
             50% {
-                transform: translate(-15px, 15px) scale(0.9);
-                opacity: 0.3;
-            }
-
-            51% {
-                transform: translate(-15px, 25px) scale(0.9);
-            }
-
-            52% {
-                transform: translate(-10px, 15px) scale(0.9);
+                transform: translate(-40px, 30px) rotate(180deg);
+                border-radius: 50% 50% 60% 40% / 60% 40% 60% 40%;
             }
 
             75% {
-                transform: translate(10px, -30px) scale(1.05);
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes glitchSlide {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-
-            5% {
-                opacity: 1;
-            }
-
-            48% {
-                transform: translateX(50%);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translateX(50%) translateY(-5px);
-                opacity: 0.5;
-            }
-
-            52% {
-                transform: translateX(50%) translateY(5px);
-                opacity: 1;
-            }
-
-            95% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateX(200%);
-                opacity: 0;
-            }
-        }
-
-        @keyframes glitchBox {
-
-            0%,
-            90% {
-                transform: translate(0, 0) skew(0deg);
-                opacity: 0;
-            }
-
-            91% {
-                opacity: 0.8;
-                transform: translate(5px, 0) skew(2deg);
-            }
-
-            92% {
-                transform: translate(-5px, 0) skew(-2deg);
-            }
-
-            93% {
-                transform: translate(3px, 2px) skew(1deg);
-            }
-
-            94%,
-            100% {
-                opacity: 0;
-                transform: translate(0, 0) skew(0deg);
+                transform: translate(20px, 40px) rotate(270deg);
+                border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
             }
         }
 
@@ -210,288 +163,172 @@
         header {
             position: fixed;
             top: 0;
-            height: 13%;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
+            background: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(30px);
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid rgba(220, 53, 69, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: #fff;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-decoration: none;
         }
 
-        /* Navigation Container */
-        .nav-container {
-            position: relative;
-            height: 100%;
-        }
-
-        /* Navigation Trigger Area */
-        .nav-trigger {
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .nav-trigger::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid rgba(220, 53, 69, 0.3);
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .nav-container:hover .nav-trigger::before {
-            border-color: rgba(220, 53, 69, 0.8);
-            box-shadow: 0 0 15px rgba(220, 53, 69, 0.4), inset 0 0 15px rgba(220, 53, 69, 0.1);
-        }
-
-        .nav-trigger i {
-            font-size: 1.5rem;
-            color: #ff6978;
-            transition: all 0.3s;
-            z-index: 1;
-        }
-
-        .nav-container:hover .nav-trigger i {
-            color: #fff;
-            text-shadow: 0 0 10px #ff6978;
-        }
-
-        /* Navigation Menu */
+        /* Navigation */
         nav {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 1.5rem;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(220, 53, 69, 0.4);
-            border-radius: 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(220, 53, 69, 0.3),
-                0 0 0 1px rgba(255, 105, 120, 0.1) inset;
-            min-width: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Tech corner accents */
-        nav::before,
-        nav::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #dc3545;
-        }
-
-        nav::before {
-            top: 0;
-            left: 0;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        nav::after {
-            bottom: 0;
-            right: 0;
-            border-left: none;
-            border-top: none;
-        }
-
-        .nav-container:hover nav {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            animation: navGlitch 0.3s;
-        }
-
-        @keyframes navGlitch {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0);
-            }
-
-            20% {
-                transform: translateY(0) translateX(-2px);
-            }
-
-            40% {
-                transform: translateY(0) translateX(2px);
-            }
-
-            60% {
-                transform: translateY(0) translateX(-1px);
-            }
-
-            80% {
-                transform: translateY(0) translateX(1px);
-            }
+            display: flex;
+            gap: 2rem;
         }
 
         nav a {
-            display: block;
-            color: #d0d0d0;
+            color: #999;
             text-decoration: none;
-            padding: 1.2rem 1.5rem;
+            font-size: 0.9rem;
             transition: all 0.3s;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(220, 53, 69, 0.15);
             position: relative;
-            overflow: hidden;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
         }
 
-        /* Tech line indicator */
-        nav a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, #dc3545, #ff6978);
-            transform: translateX(-3px);
-            transition: transform 0.3s;
-        }
-
-        /* Glitch effect on hover */
-        nav a::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 1.5rem;
-            top: 1.2rem;
-            color: #dc3545;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        nav a:last-child {
-            border-bottom: none;
-        }
-
-        nav a:hover {
+        nav a:hover,
+        nav a.active {
             color: #fff;
-            background: linear-gradient(90deg, rgba(220, 53, 69, 0.15), transparent);
-            padding-left: 2rem;
-            text-shadow: 0 0 10px rgba(255, 105, 120, 0.5);
+            background: rgba(220, 53, 69, 0.1);
         }
 
-        nav a:hover::before {
-            transform: translateX(0);
-            box-shadow: 0 0 10px #dc3545;
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            width: 30px;
+            height: 30px;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
         }
 
-        nav a:hover::after {
-            opacity: 0.3;
-            animation: textGlitch 0.3s infinite;
-        }
-
-        @keyframes textGlitch {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            25% {
-                transform: translate(-2px, -1px);
-            }
-
-            50% {
-                transform: translate(2px, 1px);
-            }
-
-            75% {
-                transform: translate(-1px, 1px);
-            }
+        .menu-toggle span {
+            width: 100%;
+            height: 2px;
+            background: #dc3545;
+            transition: all 0.3s;
         }
 
         /* Main Content */
         main {
             position: relative;
             z-index: 1;
-            padding-top: 100px;
+            padding-top: 80px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 5%;
         }
 
         /* Contact Hero */
         .contact-hero {
-            min-height: 50vh;
+            min-height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 0;
+            padding: 3rem 0;
         }
 
         .contact-hero h1 {
-            font-size: 4rem;
-            color: #ff6978;
+            font-size: 3.5rem;
+            color: #fff;
             margin-bottom: 1rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px rgba(220, 53, 69, 0.3);
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         .contact-hero p {
-            font-size: 1.3rem;
-            color: #dc3545;
+            font-size: 1.1rem;
+            color: #aaa;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.8;
         }
 
+        /* Email Section */
+        .email-section {
+            text-align: center;
+            padding: 3rem 2.5rem;
+            background: rgba(30, 30, 30, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin: 3rem 0;
+            transition: all 0.3s;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .email-section:hover {
+            border-color: rgba(220, 53, 69, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 30, 30, 0.7);
+        }
+
+        .email-section h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .email-section p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .email-link {
+            font-size: 1.5rem;
+            color: #dc3545;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .email-link:hover {
+            color: #ff6978;
+            transform: scale(1.02);
+        }
+
         /* Contact Cards */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0 4rem 0;
         }
 
         .contact-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(220, 53, 69, 0.25);
-            padding: 2.5rem;
+            background: rgba(30, 30, 30, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
         }
 
         .contact-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(220, 53, 69, 0.6);
-            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.2);
-            background: rgba(20, 20, 20, 0.8);
+            border-color: rgba(220, 53, 69, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 30, 30, 0.7);
         }
 
         .contact-card::before {
@@ -499,9 +336,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 3px;
             height: 100%;
-            background: #dc3545;
+            background: linear-gradient(180deg, #dc3545, #ff6978);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -511,105 +348,96 @@
         }
 
         .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
             display: block;
-            color: #ff6978;
+            color: #dc3545;
         }
 
         .contact-card h3 {
-            color: #ff6978;
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .contact-card .handle {
-            color: #dc3545;
-            font-size: 1.1rem;
+            color: #666;
+            font-size: 0.9rem;
             margin-bottom: 1rem;
             display: block;
         }
 
         .contact-card p {
-            color: #c8c8c8;
+            color: #aaa;
             line-height: 1.6;
             margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .contact-link {
-            display: inline-block;
-            padding: 0.7rem 1.8rem;
-            border: 1px solid #dc3545;
-            color: #ff6978;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            background: rgba(220, 53, 69, 0.05);
+            color: #dc3545;
             text-decoration: none;
             transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 8px;
         }
 
         .contact-link:hover {
-            background: #dc3545;
-            color: #0a0a0a;
-            box-shadow: 0 0 20px rgba(220, 53, 69, 0.4);
-        }
-
-        /* Email Section */
-        .email-section {
-            text-align: center;
-            padding: 4rem 3rem;
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(220, 53, 69, 0.25);
-            margin: 4rem 0;
-            transition: all 0.3s;
-        }
-
-        .email-section:hover {
-            border-color: rgba(220, 53, 69, 0.6);
-            box-shadow: 0 5px 25px rgba(220, 53, 69, 0.2);
-            background: rgba(20, 20, 20, 0.8);
-        }
-
-        .email-section h2 {
-            font-size: 2.5rem;
+            background: rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
             color: #fff;
-            margin-bottom: 1rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .email-section p {
-            color: #c8c8c8;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .email-link {
-            font-size: 1.8rem;
-            color: #ff6978;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .email-link:hover {
-            color: #dc3545;
-            transform: scale(1.05);
+            transform: translateX(3px);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 4rem;
+            padding: 2.5rem;
+            color: #555;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 2rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            nav {
+                position: fixed;
+                top: 73px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 73px);
+                background: rgba(13, 13, 13, 0.98);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                gap: 0;
+                padding: 2rem;
+                border-left: 1px solid rgba(255, 255, 255, 0.05);
+                transition: right 0.3s;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
             .contact-hero h1 {
                 font-size: 2.5rem;
             }
@@ -618,16 +446,26 @@
                 grid-template-columns: 1fr;
             }
 
-            nav {
-                gap: 1rem;
-            }
-
             .email-section h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .email-link {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .email-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -636,30 +474,30 @@
 <body>
     <!-- Background Graphics -->
     <div class="bg-graphics">
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-        <div class="bg-line"></div>
-        <div class="bg-line"></div>
-        <div class="glitch-box"></div>
-        <div class="glitch-box"></div>
+        <div class="bg-grid"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-blob"></div>
+        <div class="bg-blob"></div>
+        <div class="bg-blob"></div>
+        <div class="bg-blob"></div>
     </div>
 
     <!-- Header -->
     <header>
         <a href="index.html" class="logo">ØKEX</a>
-        <div class="nav-container">
-            <div class="nav-trigger">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav>
-                <a href="index.html" data-text="-home">-home</a>
-                <a href="about.html" data-text="-about">-about</a>
-                <a href="projects.html" data-text="-projects">-projects</a>
-                <a href="blogs.html" data-text="-blog">-blog</a>
-                <a href="contact.html" data-text="-contact">-contact</a>
-            </nav>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="blogs.html">Blog</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
     </header>
 
     <!-- Main Content -->
@@ -668,7 +506,7 @@
             <!-- Contact Hero -->
             <section class="contact-hero">
                 <div>
-                    <h1>LET'S CONNECT</h1>
+                    <h1>Let's Connect</h1>
                     <p>Find me across the web. I'm always open to collaborating, learning, discussing security or even
                         just a chat!</p>
                 </div>
@@ -678,7 +516,9 @@
             <section class="email-section">
                 <h2>Drop me an email</h2>
                 <p>For inquiries, collaborations, or just to say hi</p>
-                <a href="mailto:ankita.mkumar01@gmail.com" class="email-link">ankita.mkumar01@gmail.com</a>
+                <a href="mailto:ankita.mkumar01@gmail.com" class="email-link">
+                    <i class="far fa-envelope"></i> ankita.mkumar01@gmail.com
+                </a>
             </section>
 
             <!-- Social & Platform Links -->
@@ -689,7 +529,10 @@
                     <h3>GitHub</h3>
                     <span class="handle">@amkx1</span>
                     <p>Check out my projects, tools, and contributions to open-source security projects.</p>
-                    <a href="https://github.com/amkx1" target="_blank" class="contact-link">Visit Profile</a>
+                    <a href="https://github.com/amkx1" target="_blank" class="contact-link">
+                        Visit Profile
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- LinkedIn -->
@@ -697,8 +540,10 @@
                     <i class="fab fa-linkedin contact-icon"></i>
                     <h3>LinkedIn</h3>
                     <p>Let's connect professionally. Open to networking and career opportunities.</p>
-                    <a href="https://linkedin.com/in/ankita-m-kumar-b6a624327" target="_blank"
-                        class="contact-link">Connect</a>
+                    <a href="https://linkedin.com/in/ankita-m-kumar-b6a624327" target="_blank" class="contact-link">
+                        Connect
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- X (Twitter) -->
@@ -706,7 +551,10 @@
                     <i class="fab fa-x-twitter contact-icon"></i>
                     <h3>X (Twitter)</h3>
                     <p>Hit me with a follow!</p>
-                    <a href="https://x.com/ankita01mk" target="_blank" class="contact-link">Follow</a>
+                    <a href="https://x.com/ankita01mk" target="_blank" class="contact-link">
+                        Follow
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- Discord -->
@@ -715,7 +563,10 @@
                     <h3>Discord</h3>
                     <span class="handle">@kexilie</span>
                     <p>Let's have security discussions and CTF collaborations. Always up for a chat.</p>
-                    <a href="https://discord.com/users/kexilie" target="_blank" class="contact-link">Message</a>
+                    <a href="https://discord.com/users/kexilie" target="_blank" class="contact-link">
+                        Message
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- TryHackMe -->
@@ -724,17 +575,27 @@
                     <h3>TryHackMe</h3>
                     <span class="handle">@0KeX</span>
                     <p>Track my progress through rooms and challenges. I'm always evolving.</p>
-                    <a href="https://tryhackme.com/p/0KeX" target="_blank" class="contact-link">View Profile</a>
+                    <a href="https://tryhackme.com/p/0KeX" target="_blank" class="contact-link">
+                        View Profile
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-
             </section>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>Copyright © 2026 0KeX. Stay curious.</p>
+        <p>© 2026 0KeX. Stay curious.</p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 
 </html>
