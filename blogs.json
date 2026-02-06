@@ -1,0 +1,13 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Hello World",
+      "excerpt": "This site is my personal space to learn, build, break things, and document the process.",
+      "content": "<p>Hi there! If it’s your first time here, I’m happy to have you! If not, thank you for coming again!\nYou all are awesome!</p><p>This site is my personal space to <strong>learn, build, break things, and document the process.</strong></p><p>Right now, I’m a student deeply interested in <strong>technology, backend systems, and cybersecurity</strong>. I don’t claim to know everything. In fact, this blog exists because <strong>I don’t</strong> and I believe learning in public is one of the best ways to grow and also hold myself accountable.</p><h1>What will you find here?</h1><p>On this site you’ll mostly find-</p><ul><li>Breakdown of recent concepts I’ve learned</li><li>The working on projects I built or am building</li><li>Writeups on Labs, challenges or CTFs</li><li>My personal notes, experiences and everything I come across</li><li>Probably some studies and breakdown on recent news as well</li></ul><p>Now I’m not an expert and everything will not be perfect but this is more for myself than anyone. I believe this will help me track my progress and feel accomplished as well.</p><p>And as I am teaching myself, I hope this can help you or inspire you from my journey as well. </p><p>If you’re reading this early, as this is THE first post on here, I love you! You are a part of this foundation being built, even just as my reader. Thank you soo much for stopping by.</p><p>Let’s see how this goes!</p>",
+      "date": "Jan 31, 2026",
+      "category": "misc",
+      "tags": []
+    }
+  ]
+}
