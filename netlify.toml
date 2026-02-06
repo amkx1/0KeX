@@ -1,9 +1,0 @@
-[build]
-  command = "python notionsync.py"
-  publish = "."
-
-[build.environment]
-  PYTHON_VERSION = "3.8"
-
-# If you want to trigger rebuilds on a schedule
-# You'll need to set this up in Netlify UI or use a webhook
