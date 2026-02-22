@@ -15,148 +15,9 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0d0d0d;
-            color: #e8e8e8;
+            background: #0a0a0a;
+            color: #e0e0e0;
             overflow-x: hidden;
-        }
-
-        /* Subtle Background Graphics */
-        .bg-graphics {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        /* Mesh gradient background */
-        .bg-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 30%, rgba(220, 53, 69, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 0, 0, 0.06) 0%, transparent 50%);
-        }
-
-        /* Subtle animated orbs */
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-orb:nth-child(2) {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.15), transparent 70%);
-            top: 10%;
-            right: 10%;
-            animation-delay: 0s;
-        }
-
-        .bg-orb:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.12), transparent 70%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 10s;
-        }
-
-        /* Blob Graphics */
-        .bg-blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.5;
-            animation: blobFloat 25s infinite ease-in-out;
-        }
-
-        .bg-blob:nth-child(4) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.35), rgba(220, 53, 69, 0.1) 50%, transparent 70%);
-            top: 50%;
-            right: 5%;
-            border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            animation-delay: 0s;
-        }
-
-        .bg-blob:nth-child(5) {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(255, 69, 78, 0.3), rgba(255, 69, 78, 0.08) 50%, transparent 70%);
-            top: 15%;
-            left: 8%;
-            border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            animation-delay: 8s;
-        }
-
-        .bg-blob:nth-child(6) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.32), rgba(139, 0, 0, 0.1) 50%, transparent 70%);
-            bottom: 10%;
-            right: 25%;
-            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
-            animation-delay: 15s;
-        }
-
-        .bg-blob:nth-child(7) {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.28), rgba(220, 53, 69, 0.08) 50%, transparent 70%);
-            bottom: 35%;
-            left: 3%;
-            border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
-            animation-delay: 20s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            33% {
-                transform: translate(30px, -30px);
-            }
-
-            66% {
-                transform: translate(-20px, 20px);
-            }
-        }
-
-        @keyframes blobFloat {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            }
-
-            25% {
-                transform: translate(30px, -40px) rotate(90deg);
-                border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%;
-            }
-
-            50% {
-                transform: translate(-40px, 30px) rotate(180deg);
-                border-radius: 50% 50% 60% 40% / 60% 40% 60% 40%;
-            }
-
-            75% {
-                transform: translate(20px, 40px) rotate(270deg);
-                border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            }
         }
 
         /* Header */
@@ -164,14 +25,14 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(13, 13, 13, 0.7);
-            backdrop-filter: blur(30px);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
             padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(220, 53, 69, 0.15);
         }
 
         .logo {
@@ -182,7 +43,6 @@
             text-decoration: none;
         }
 
-        /* Navigation */
         nav {
             display: flex;
             gap: 2rem;
@@ -193,7 +53,6 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.3s;
-            position: relative;
             padding: 0.5rem 1rem;
             border-radius: 8px;
         }
@@ -204,7 +63,7 @@
             background: rgba(220, 53, 69, 0.1);
         }
 
-        /* Mobile menu toggle */
+        /* Mobile menu */
         .menu-toggle {
             display: none;
             width: 30px;
@@ -221,17 +80,104 @@
             transition: all 0.3s;
         }
 
-        /* Main Content */
+        /* Main Layout */
         main {
-            position: relative;
-            z-index: 1;
             padding-top: 80px;
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            width: 280px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(220, 53, 69, 0.1);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(220, 53, 69, 0.3);
+            border-radius: 3px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(220, 53, 69, 0.5);
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.8rem;
+            border-left: 2px solid transparent;
+            transition: all 0.3s;
+            line-height: 1.4;
+        }
+
+        .toc-link:hover {
+            color: #fff;
+            border-left-color: rgba(220, 53, 69, 0.5);
+            background: rgba(220, 53, 69, 0.05);
+        }
+
+        .toc-link.active {
+            color: #dc3545;
+            border-left-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .toc-item.h3 .toc-link {
+            font-size: 0.85rem;
+            padding-left: 1.5rem;
+            color: #777;
+        }
+
+        /* Content Area */
+        .content-wrapper {
+            flex: 1;
+            min-width: 0;
+            padding: 0 2rem;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 5%;
         }
 
         /* Back Link */
@@ -261,10 +207,9 @@
         .blog-header {
             margin-bottom: 3rem;
             padding: 2.5rem;
-            background: rgba(30, 30, 30, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(220, 53, 69, 0.1);
+            border-radius: 12px;
         }
 
         .blog-meta {
@@ -327,48 +272,52 @@
         /* Blog Content */
         .blog-content {
             font-size: 1.05rem;
-            line-height: 1.8;
-            color: #aaa;
+            line-height: 1.9;
+            color: #c8c8c8;
             padding-bottom: 4rem;
         }
 
         .blog-content h2 {
             color: #fff;
-            margin-top: 2.5rem;
-            margin-bottom: 1.2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
             font-size: 1.8rem;
             font-weight: 600;
+            scroll-margin-top: 100px;
         }
 
         .blog-content h3 {
-            color: #ddd;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            color: #e0e0e0;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
             font-size: 1.4rem;
             font-weight: 600;
+            scroll-margin-top: 100px;
         }
 
         .blog-content p {
             margin-bottom: 1.5rem;
+            line-height: 1.9;
         }
 
         .blog-content code {
             background: rgba(40, 40, 40, 0.6);
             padding: 0.3rem 0.7rem;
             border-radius: 6px;
-            color: #dc3545;
-            font-family: 'Courier New', monospace;
+            color: #ff6978;
+            font-family: 'Courier New', 'Consolas', monospace;
             font-size: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .blog-content pre {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(15, 15, 15, 0.8);
             padding: 1.5rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.1);
             overflow-x: auto;
             margin: 2rem 0;
+            line-height: 1.6;
         }
 
         .blog-content pre code {
@@ -376,6 +325,7 @@
             padding: 0;
             color: #e8e8e8;
             border: none;
+            font-size: 0.95rem;
         }
 
         .blog-content ul,
@@ -386,26 +336,44 @@
 
         .blog-content li {
             margin-bottom: 0.8rem;
+            line-height: 1.8;
         }
 
         .blog-content a {
-            color: #dc3545;
+            color: #ff6978;
             text-decoration: none;
-            border-bottom: 1px solid rgba(220, 53, 69, 0.3);
+            border-bottom: 1px solid rgba(255, 105, 120, 0.3);
             transition: all 0.3s;
         }
 
         .blog-content a:hover {
-            color: #ff6978;
-            border-bottom-color: #ff6978;
+            color: #dc3545;
+            border-bottom-color: #dc3545;
         }
 
         .blog-content blockquote {
             border-left: 3px solid #dc3545;
             padding-left: 1.5rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             color: #999;
             font-style: italic;
+            background: rgba(220, 53, 69, 0.03);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .blog-content hr {
+            border: none;
+            height: 1px;
+            background: rgba(220, 53, 69, 0.2);
+            margin: 3rem 0;
+        }
+
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem 0;
         }
 
         /* Footer */
@@ -419,6 +387,16 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                padding: 0 5%;
+            }
+        }
+
         @media (max-width: 968px) {
             nav {
                 position: fixed;
@@ -426,12 +404,12 @@
                 right: -100%;
                 width: 280px;
                 height: calc(100vh - 73px);
-                background: rgba(13, 13, 13, 0.98);
+                background: rgba(10, 10, 10, 0.98);
                 backdrop-filter: blur(30px);
                 flex-direction: column;
                 gap: 0;
                 padding: 2rem;
-                border-left: 1px solid rgba(255, 255, 255, 0.05);
+                border-left: 1px solid rgba(220, 53, 69, 0.15);
                 transition: right 0.3s;
             }
 
@@ -468,6 +446,10 @@
             .blog-content h3 {
                 font-size: 1.2rem;
             }
+
+            .content-wrapper {
+                padding: 0 1rem;
+            }
         }
 
         @media (max-width: 640px) {
@@ -479,20 +461,9 @@
 </head>
 
 <body>
-    <!-- Background Graphics -->
-    <div class="bg-graphics">
-        <div class="bg-grid"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-    </div>
-
     <!-- Header -->
     <header>
-        <a href="index.html" class="logo">ØKEX</a>
+        <a href="index.html" class="logo">KΞLØG</a>
         <div class="menu-toggle" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -509,31 +480,42 @@
 
     <!-- Main Content -->
     <main>
-        <div class="container">
-            <a href="blogs.html" class="back-link">
-                <i class="fas fa-arrow-left"></i>
-                Back to all blogs
-            </a>
+        <!-- Table of Contents Sidebar -->
+        <aside class="toc-sidebar" id="toc">
+            <div class="toc-title">On This Page</div>
+            <ul class="toc-list" id="tocList">
+                <!-- Generated dynamically -->
+            </ul>
+        </aside>
 
-            <div class="blog-header">
-                <div class="blog-meta">
-                    <span class="blog-date" id="blogDate">
-                        <i class="far fa-calendar"></i>
-                        <span id="blogDateText"></span>
-                    </span>
-                    <span class="blog-category" id="blogCategory"></span>
+        <!-- Content Area -->
+        <div class="content-wrapper">
+            <div class="container">
+                <a href="blogs.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to all blogs
+                </a>
+
+                <div class="blog-header">
+                    <div class="blog-meta">
+                        <span class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span id="blogDateText"></span>
+                        </span>
+                        <span class="blog-category" id="blogCategory"></span>
+                    </div>
+                    <h1 class="blog-title" id="blogTitle"></h1>
+                    <div class="blog-tags" id="blogTags"></div>
                 </div>
-                <h1 class="blog-title" id="blogTitle"></h1>
-                <div class="blog-tags" id="blogTags"></div>
-            </div>
 
-            <div class="blog-content" id="blogContent"></div>
+                <div class="blog-content" id="blogContent"></div>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 0KeX. Stay curious.</p>
+        <p>© 2026 kelog. Stay curious.</p>
     </footer>
 
     <script>
@@ -541,6 +523,67 @@
         function toggleMenu() {
             const nav = document.getElementById('nav');
             nav.classList.toggle('active');
+        }
+
+        // Generate Table of Contents
+        function generateTOC() {
+            const content = document.getElementById('blogContent');
+            const tocList = document.getElementById('tocList');
+            const headings = content.querySelectorAll('h2, h3');
+
+            if (headings.length === 0) {
+                document.getElementById('toc').style.display = 'none';
+                return;
+            }
+
+            headings.forEach((heading, index) => {
+                // Add ID to heading for anchor linking
+                const id = `heading-${index}`;
+                heading.id = id;
+
+                // Create TOC item
+                const li = document.createElement('li');
+                li.className = `toc-item ${heading.tagName.toLowerCase()}`;
+
+                const a = document.createElement('a');
+                a.href = `#${id}`;
+                a.className = 'toc-link';
+                a.textContent = heading.textContent;
+                a.onclick = (e) => {
+                    e.preventDefault();
+                    heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    updateActiveTOC();
+                };
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            // Update active TOC on scroll
+            window.addEventListener('scroll', updateActiveTOC);
+            updateActiveTOC();
+        }
+
+        // Update active TOC item based on scroll position
+        function updateActiveTOC() {
+            const headings = document.querySelectorAll('.blog-content h2, .blog-content h3');
+            const tocLinks = document.querySelectorAll('.toc-link');
+
+            let currentActive = null;
+
+            headings.forEach((heading) => {
+                const rect = heading.getBoundingClientRect();
+                if (rect.top <= 150 && rect.top >= -200) {
+                    currentActive = heading.id;
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentActive}`) {
+                    link.classList.add('active');
+                }
+            });
         }
 
         async function loadBlog() {
@@ -566,6 +609,9 @@
                         tagEl.textContent = tag;
                         tagsContainer.appendChild(tagEl);
                     });
+
+                    // Generate TOC after content is loaded
+                    generateTOC();
                 } else {
                     document.getElementById('blogContent').innerHTML = '<p>Blog post not found.</p>';
                 }
