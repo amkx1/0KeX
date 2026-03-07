@@ -5,8 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <title>Blog Post | kelog</title>
     <style>
+        :root {
+            --red: #dc3545;
+            --red-dim: rgba(220, 53, 69, 0.12);
+            --border-red: rgba(220, 53, 69, 0.2);
+            --bg: #0e0e0e;
+            --bg2: #141414;
+            --border: rgba(255, 255, 255, 0.06);
+            --text: #c8c8c8;
+            --text-dim: #555;
+            --text-mid: #888;
+            --mono: 'JetBrains Mono', monospace;
+            --prose: 'Inter', -apple-system, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,402 +31,508 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: var(--prose);
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.7;
         }
 
-        /* Header */
+        /* ── HEADER ── */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1.2rem 5%;
+            background: rgba(14, 14, 14, 0.9);
+            backdrop-filter: blur(16px);
+            padding: 0 5%;
+            height: 54px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             z-index: 1000;
-            border-bottom: 1px solid rgba(220, 53, 69, 0.15);
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: var(--mono);
+            font-size: 1.15rem;
+            font-weight: 600;
             color: #fff;
-            letter-spacing: 1px;
             text-decoration: none;
+            letter-spacing: 2px;
         }
 
         nav {
             display: flex;
-            gap: 2rem;
+            gap: 0.2rem;
         }
 
         nav a {
-            color: #999;
+            font-family: var(--mono);
+            color: var(--text-dim);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            font-size: 0.78rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            transition: all 0.15s;
+            border: 1px solid transparent;
         }
 
         nav a:hover,
         nav a.active {
             color: #fff;
-            background: rgba(220, 53, 69, 0.1);
+            background: var(--red-dim);
+            border-color: var(--border-red);
         }
 
-        /* Mobile menu */
         .menu-toggle {
             display: none;
-            width: 30px;
-            height: 30px;
             flex-direction: column;
             justify-content: space-around;
+            width: 26px;
+            height: 26px;
             cursor: pointer;
         }
 
         .menu-toggle span {
             width: 100%;
-            height: 2px;
-            background: #dc3545;
-            transition: all 0.3s;
+            height: 1.5px;
+            background: var(--red);
         }
 
-        /* Main Layout */
+        /* ── LAYOUT ── */
         main {
-            padding-top: 80px;
+            padding-top: 54px;
             display: flex;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            gap: 2rem;
+            padding-left: 5%;
+            padding-right: 5%;
+            gap: 4rem;
         }
 
-        /* Table of Contents Sidebar */
+        /* ── TOC SIDEBAR ── */
         .toc-sidebar {
             position: sticky;
-            top: 100px;
-            width: 280px;
+            top: 80px;
+            width: 220px;
             height: fit-content;
-            max-height: calc(100vh - 120px);
+            max-height: calc(100vh - 100px);
             overflow-y: auto;
-            padding: 2rem 1.5rem;
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(220, 53, 69, 0.1);
-            border-radius: 12px;
             flex-shrink: 0;
+            padding-top: 2.5rem;
         }
 
         .toc-sidebar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .toc-sidebar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
+            width: 3px;
         }
 
         .toc-sidebar::-webkit-scrollbar-thumb {
-            background: rgba(220, 53, 69, 0.3);
-            border-radius: 3px;
-        }
-
-        .toc-sidebar::-webkit-scrollbar-thumb:hover {
-            background: rgba(220, 53, 69, 0.5);
+            background: var(--border-red);
         }
 
         .toc-title {
-            font-size: 0.75rem;
+            font-family: var(--mono);
+            font-size: 0.62rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #666;
+            letter-spacing: 2px;
+            color: var(--text-dim);
             margin-bottom: 1rem;
-            font-weight: 600;
+            text-align: right;
         }
 
         .toc-list {
             list-style: none;
         }
 
-        .toc-item {
-            margin-bottom: 0.5rem;
-        }
-
         .toc-link {
             display: block;
-            color: #999;
+            color: var(--text-dim);
             text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.5rem 0.8rem;
-            border-left: 2px solid transparent;
-            transition: all 0.3s;
+            font-size: 0.78rem;
+            font-family: var(--prose);
+            padding: 0.3rem 0.8rem 0.3rem 0;
+            border-right: 1px solid var(--border);
+            text-align: right;
+            transition: color 0.15s, border-color 0.15s;
             line-height: 1.4;
+            margin-bottom: 0.1rem;
         }
 
         .toc-link:hover {
-            color: #fff;
-            border-left-color: rgba(220, 53, 69, 0.5);
-            background: rgba(220, 53, 69, 0.05);
+            color: var(--text);
+            border-right-color: var(--text-mid);
         }
 
         .toc-link.active {
-            color: #dc3545;
-            border-left-color: #dc3545;
-            background: rgba(220, 53, 69, 0.1);
+            color: var(--red);
+            border-right-color: var(--red);
         }
 
         .toc-item.h3 .toc-link {
-            font-size: 0.85rem;
-            padding-left: 1.5rem;
-            color: #777;
+            font-size: 0.73rem;
+            padding-right: 1.5rem;
+            color: #444;
         }
 
-        /* Content Area */
+        .toc-item.h3 .toc-link:hover {
+            color: var(--text-mid);
+        }
+
+        /* ── CONTENT ── */
         .content-wrapper {
             flex: 1;
             min-width: 0;
-            padding: 0 2rem;
+            padding-top: 2.5rem;
+            padding-bottom: 5rem;
+            max-width: 680px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Back Link */
+        /* Back link */
         .back-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #999;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
             text-decoration: none;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            background: rgba(30, 30, 30, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 2.5rem;
+            transition: color 0.15s;
         }
 
         .back-link:hover {
-            color: #fff;
-            background: rgba(220, 53, 69, 0.1);
-            border-color: rgba(220, 53, 69, 0.3);
-            transform: translateX(-3px);
+            color: var(--text);
         }
 
-        /* Blog Header */
+        .back-link i {
+            font-size: 0.65rem;
+        }
+
+        /* Blog header */
         .blog-header {
             margin-bottom: 3rem;
-            padding: 2.5rem;
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(220, 53, 69, 0.1);
-            border-radius: 12px;
         }
 
         .blog-meta {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
             flex-wrap: wrap;
         }
 
         .blog-date {
-            color: #666;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
         }
 
         .blog-category {
-            padding: 0.4rem 1rem;
-            background: rgba(220, 53, 69, 0.1);
-            border: 1px solid rgba(220, 53, 69, 0.3);
-            color: #dc3545;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            padding: 0.15rem 0.55rem;
+            background: var(--red-dim);
+            border: 1px solid var(--border-red);
+            color: var(--red);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 3px;
         }
 
         .blog-title {
-            font-size: 2.8rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            line-height: 1.2;
+            font-family: var(--prose);
+            font-size: 2rem;
+            font-weight: 500;
+            color: #e8e8e8;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
         }
 
         .blog-tags {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
         .tag {
-            padding: 0.4rem 0.9rem;
-            background: rgba(40, 40, 40, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #aaa;
-            font-size: 0.8rem;
-            border-radius: 6px;
-            transition: all 0.3s;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            border-radius: 3px;
         }
 
-        .tag:hover {
-            background: rgba(220, 53, 69, 0.1);
-            border-color: rgba(220, 53, 69, 0.3);
-            color: #dc3545;
+        /* Divider */
+        .header-rule {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 2rem 0;
         }
 
-        /* Blog Content */
+        /* ── PROSE CONTENT ── */
         .blog-content {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: #c8c8c8;
-            padding-bottom: 4rem;
+            font-family: var(--prose);
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #b8b8b8;
+            font-weight: 300;
         }
 
         .blog-content h2 {
-            color: #fff;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 600;
-            scroll-margin-top: 100px;
+            font-family: var(--prose);
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #ddd;
+            margin-top: 2.8rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 80px;
         }
 
         .blog-content h3 {
-            color: #e0e0e0;
-            margin-top: 2.5rem;
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-            scroll-margin-top: 100px;
+            font-family: var(--prose);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #ccc;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            scroll-margin-top: 80px;
         }
 
         .blog-content p {
-            margin-bottom: 1.5rem;
-            line-height: 1.9;
+            margin-bottom: 1.4rem;
         }
 
+        .blog-content a {
+            color: #c77;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(200, 100, 100, 0.25);
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .blog-content a:hover {
+            color: var(--red);
+            border-bottom-color: var(--red);
+        }
+
+        /* Inline code */
         .blog-content code {
-            background: rgba(40, 40, 40, 0.6);
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
-            color: #ff6978;
-            font-family: 'Courier New', 'Consolas', monospace;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: var(--mono);
+            font-size: 0.83rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8957a;
+            padding: 0.15rem 0.45rem;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Code blocks */
+        .code-block {
+            position: relative;
+            margin: 1.8rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: #0d0d0d;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.45rem 1rem;
+            background: #161616;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Traffic light dots */
+        .code-dots {
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .code-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .code-dot.r {
+            background: #ff5f57;
+        }
+
+        .code-dot.y {
+            background: #ffbd2e;
+        }
+
+        .code-dot.g {
+            background: #28ca41;
+        }
+
+        .code-lang {
+            font-family: var(--mono);
+            font-size: 0.63rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--text-dim);
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0.18rem 0.55rem;
+            cursor: pointer;
+            transition: color 0.1s, border-color 0.1s, background 0.1s;
+        }
+
+        .copy-btn:hover {
+            color: #ccc;
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .copy-btn.copied {
+            color: #4ec94e;
+            border-color: rgba(78, 201, 78, 0.3);
         }
 
         .blog-content pre {
-            background: rgba(15, 15, 15, 0.8);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(220, 53, 69, 0.1);
+            background: #0d0d0d;
+            padding: 1.2rem 1.4rem;
             overflow-x: auto;
-            margin: 2rem 0;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin: 0;
+            border-radius: 0;
         }
 
         .blog-content pre code {
             background: none;
-            padding: 0;
-            color: #e8e8e8;
             border: none;
-            font-size: 0.95rem;
+            padding: 0;
+            color: #d4d4d4;
+            font-size: 0.82rem;
         }
 
+        .blog-content pre::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .blog-content pre::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+        }
+
+        /* Lists */
         .blog-content ul,
         .blog-content ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
+            margin-left: 1.4rem;
+            margin-bottom: 1.4rem;
         }
 
         .blog-content li {
-            margin-bottom: 0.8rem;
-            line-height: 1.8;
+            margin-bottom: 0.5rem;
         }
 
-        .blog-content a {
-            color: #ff6978;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 105, 120, 0.3);
-            transition: all 0.3s;
+        .blog-content ul li::marker {
+            color: var(--red);
         }
 
-        .blog-content a:hover {
-            color: #dc3545;
-            border-bottom-color: #dc3545;
-        }
-
+        /* Blockquote */
         .blog-content blockquote {
-            border-left: 3px solid #dc3545;
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            color: #999;
+            border-left: 2px solid rgba(220, 53, 69, 0.35);
+            padding: 0.8rem 1.4rem;
+            margin: 1.8rem 0;
+            color: var(--text-mid);
             font-style: italic;
-            background: rgba(220, 53, 69, 0.03);
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0 4px 4px 0;
         }
 
+        .blog-content blockquote p {
+            margin-bottom: 0;
+        }
+
+        /* HR */
         .blog-content hr {
             border: none;
             height: 1px;
-            background: rgba(220, 53, 69, 0.2);
-            margin: 3rem 0;
+            background: var(--border);
+            margin: 2.5rem 0;
         }
 
+        /* Images */
         .blog-content img {
             max-width: 100%;
             height: auto;
-            border-radius: 12px;
-            margin: 2rem 0;
+            border-radius: 6px;
+            margin: 1.8rem 0;
+            border: 1px solid var(--border);
         }
 
-        /* Footer */
+        /* ── FOOTER ── */
         footer {
             text-align: center;
-            padding: 2.5rem;
-            color: #555;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 2rem;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            font-family: var(--mono);
+            border-top: 1px solid var(--border);
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
+        footer span {
+            color: var(--red);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
             .toc-sidebar {
                 display: none;
             }
 
-            .content-wrapper {
-                padding: 0 5%;
+            main {
+                gap: 0;
             }
         }
 
-        @media (max-width: 968px) {
+        @media (max-width: 768px) {
+            main {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .blog-title {
+                font-size: 1.6rem;
+            }
+
             nav {
                 position: fixed;
-                top: 73px;
+                top: 54px;
                 right: -100%;
-                width: 280px;
-                height: calc(100vh - 73px);
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(30px);
+                width: 240px;
+                height: calc(100vh - 54px);
+                background: rgba(14, 14, 14, 0.98);
+                backdrop-filter: blur(16px);
                 flex-direction: column;
                 gap: 0;
-                padding: 2rem;
-                border-left: 1px solid rgba(220, 53, 69, 0.15);
+                padding: 1.5rem;
+                border-left: 1px solid var(--border);
                 transition: right 0.3s;
             }
 
@@ -418,114 +541,74 @@
             }
 
             nav a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid var(--border);
                 border-radius: 0;
+                font-size: 0.82rem;
             }
 
             .menu-toggle {
                 display: flex;
-            }
-
-            .blog-title {
-                font-size: 2rem;
-            }
-
-            .blog-header {
-                padding: 1.5rem;
-            }
-
-            .blog-content {
-                font-size: 1rem;
-            }
-
-            .blog-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .blog-content h3 {
-                font-size: 1.2rem;
-            }
-
-            .content-wrapper {
-                padding: 0 1rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .blog-title {
-                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+
     <header>
         <a href="index.html" class="logo">KΞLØG</a>
         <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
         <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="blogs.html" class="active">Blog</a>
-            <a href="contact.html">Contact</a>
+            <a href="index.html">home</a>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="blogs.html" class="active">blog</a>
+            <a href="contact.html">contact</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Table of Contents Sidebar -->
-        <aside class="toc-sidebar" id="toc">
-            <div class="toc-title">On This Page</div>
-            <ul class="toc-list" id="tocList">
-                <!-- Generated dynamically -->
-            </ul>
-        </aside>
-
-        <!-- Content Area -->
+        <!-- Content -->
         <div class="content-wrapper">
-            <div class="container">
-                <a href="blogs.html" class="back-link">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to all blogs
-                </a>
 
-                <div class="blog-header">
-                    <div class="blog-meta">
-                        <span class="blog-date">
-                            <i class="far fa-calendar"></i>
-                            <span id="blogDateText"></span>
-                        </span>
-                        <span class="blog-category" id="blogCategory"></span>
-                    </div>
-                    <h1 class="blog-title" id="blogTitle"></h1>
-                    <div class="blog-tags" id="blogTags"></div>
+            <a href="blogs.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> back to blogs
+            </a>
+
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <span class="blog-date" id="blogDateText"></span>
+                    <span class="blog-category" id="blogCategory"></span>
                 </div>
-
-                <div class="blog-content" id="blogContent"></div>
+                <h1 class="blog-title" id="blogTitle"></h1>
+                <div class="blog-tags" id="blogTags"></div>
             </div>
+
+            <hr class="header-rule">
+
+            <div class="blog-content" id="blogContent"></div>
+
         </div>
+
+        <!-- TOC — right side -->
+        <aside class="toc-sidebar" id="toc">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-list" id="tocList"></ul>
+        </aside>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2026 kelog. Stay curious.</p>
+        <p>© 2026 kelog. Stay <span>curious</span>.</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
         function toggleMenu() {
-            const nav = document.getElementById('nav');
-            nav.classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
         }
 
-        // Generate Table of Contents
         function generateTOC() {
             const content = document.getElementById('blogContent');
             const tocList = document.getElementById('tocList');
@@ -536,88 +619,117 @@
                 return;
             }
 
-            headings.forEach((heading, index) => {
-                // Add ID to heading for anchor linking
-                const id = `heading-${index}`;
-                heading.id = id;
-
-                // Create TOC item
+            headings.forEach((heading, i) => {
+                heading.id = `h-${i}`;
                 const li = document.createElement('li');
                 li.className = `toc-item ${heading.tagName.toLowerCase()}`;
-
                 const a = document.createElement('a');
-                a.href = `#${id}`;
+                a.href = `#h-${i}`;
                 a.className = 'toc-link';
                 a.textContent = heading.textContent;
                 a.onclick = (e) => {
                     e.preventDefault();
                     heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    updateActiveTOC();
                 };
-
                 li.appendChild(a);
                 tocList.appendChild(li);
             });
 
-            // Update active TOC on scroll
-            window.addEventListener('scroll', updateActiveTOC);
+            window.addEventListener('scroll', updateActiveTOC, { passive: true });
             updateActiveTOC();
         }
 
-        // Update active TOC item based on scroll position
         function updateActiveTOC() {
             const headings = document.querySelectorAll('.blog-content h2, .blog-content h3');
-            const tocLinks = document.querySelectorAll('.toc-link');
+            const links = document.querySelectorAll('.toc-link');
+            let current = null;
 
-            let currentActive = null;
-
-            headings.forEach((heading) => {
-                const rect = heading.getBoundingClientRect();
-                if (rect.top <= 150 && rect.top >= -200) {
-                    currentActive = heading.id;
-                }
+            headings.forEach(h => {
+                if (h.getBoundingClientRect().top <= 120) current = h.id;
             });
 
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentActive}`) {
-                    link.classList.add('active');
+            links.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === `#${current}`);
+            });
+        }
+
+        function wrapCodeBlocks() {
+            const blocks = document.querySelectorAll('.blog-content pre');
+            blocks.forEach(pre => {
+                const code = pre.querySelector('code');
+                let lang = '';
+                if (code) {
+                    const match = [...code.classList].find(c => c.startsWith('language-'));
+                    if (match) lang = match.replace('language-', '');
                 }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block';
+
+                const header = document.createElement('div');
+                header.className = 'code-header';
+                header.style.position = 'relative';
+                header.innerHTML = `
+                    <div class="code-dots">
+                        <span class="code-dot r"></span>
+                        <span class="code-dot y"></span>
+                        <span class="code-dot g"></span>
+                    </div>
+                    <span class="code-lang">${lang || 'code'}</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="far fa-copy"></i> copy
+                    </button>
+                `;
+
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(header);
+                wrapper.appendChild(pre);
+            });
+        }
+
+        function copyCode(btn) {
+            const pre = btn.closest('.code-block').querySelector('pre');
+            const text = pre.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="far fa-copy"></i> copy';
+                    btn.classList.remove('copied');
+                }, 2000);
             });
         }
 
         async function loadBlog() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const blogId = parseInt(urlParams.get('id'));
-
+            const id = parseInt(new URLSearchParams(window.location.search).get('id'));
             try {
-                const response = await fetch('blogs.json');
-                const data = await response.json();
-                const blog = data.blogs.find(b => b.id === blogId);
+                const res = await fetch('blogs.json');
+                const data = await res.json();
+                const blog = data.blogs.find(b => b.id === id);
 
                 if (blog) {
                     document.getElementById('blogDateText').textContent = blog.date;
                     document.getElementById('blogCategory').textContent = blog.category;
                     document.getElementById('blogTitle').textContent = blog.title;
                     document.getElementById('blogContent').innerHTML = blog.content;
-                    document.title = `${blog.title} - 0KeX`;
+                    document.title = `${blog.title} | kelog`;
 
-                    const tagsContainer = document.getElementById('blogTags');
-                    blog.tags.forEach(tag => {
-                        const tagEl = document.createElement('span');
-                        tagEl.className = 'tag';
-                        tagEl.textContent = tag;
-                        tagsContainer.appendChild(tagEl);
+                    blog.tags?.forEach(tag => {
+                        const t = document.createElement('span');
+                        t.className = 'tag';
+                        t.textContent = tag;
+                        document.getElementById('blogTags').appendChild(t);
                     });
 
-                    // Generate TOC after content is loaded
                     generateTOC();
+                    wrapCodeBlocks();
                 } else {
-                    document.getElementById('blogContent').innerHTML = '<p>Blog post not found.</p>';
+                    document.getElementById('blogContent').innerHTML = '<p>Post not found.</p>';
+                    document.getElementById('toc').style.display = 'none';
                 }
-            } catch (error) {
-                console.error('Error loading blog:', error);
-                document.getElementById('blogContent').innerHTML = '<p>Error loading blog post.</p>';
+            } catch {
+                document.getElementById('blogContent').innerHTML = '<p>Could not load post.</p>';
+                document.getElementById('toc').style.display = 'none';
             }
         }
 

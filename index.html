@@ -5,724 +5,308 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>kelog </title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>kelog</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ── INDEX-SPECIFIC ONLY ── */
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0d0d0d;
-            color: #e8e8e8;
-            overflow-x: hidden;
-        }
-
-        /* Subtle Background Graphics */
-        .bg-graphics {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        /* Mesh gradient background */
-        .bg-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 30%, rgba(220, 53, 69, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 0, 0, 0.06) 0%, transparent 50%);
-        }
-
-        /* Subtle animated orbs */
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-orb:nth-child(2) {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.15), transparent 70%);
-            top: 10%;
-            right: 10%;
-            animation-delay: 0s;
-        }
-
-        .bg-orb:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.12), transparent 70%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 10s;
-        }
-
-        /* Blob Graphics */
-        .bg-blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.5;
-            animation: blobFloat 25s infinite ease-in-out;
-        }
-
-        .bg-blob:nth-child(4) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.35), rgba(220, 53, 69, 0.1) 50%, transparent 70%);
-            top: 50%;
-            right: 5%;
-            border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            animation-delay: 0s;
-        }
-
-        .bg-blob:nth-child(5) {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(255, 69, 78, 0.3), rgba(255, 69, 78, 0.08) 50%, transparent 70%);
-            top: 15%;
-            left: 8%;
-            border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            animation-delay: 8s;
-        }
-
-        .bg-blob:nth-child(6) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.32), rgba(139, 0, 0, 0.1) 50%, transparent 70%);
-            bottom: 10%;
-            right: 25%;
-            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
-            animation-delay: 15s;
-        }
-
-        .bg-blob:nth-child(7) {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.28), rgba(220, 53, 69, 0.08) 50%, transparent 70%);
-            bottom: 35%;
-            left: 3%;
-            border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
-            animation-delay: 20s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            33% {
-                transform: translate(30px, -30px);
-            }
-
-            66% {
-                transform: translate(-20px, 20px);
-            }
-        }
-
-        @keyframes blobFloat {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            }
-
-            25% {
-                transform: translate(30px, -40px) rotate(90deg);
-                border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%;
-            }
-
-            50% {
-                transform: translate(-40px, 30px) rotate(180deg);
-                border-radius: 50% 50% 60% 40% / 60% 40% 60% 40%;
-            }
-
-            75% {
-                transform: translate(20px, 40px) rotate(270deg);
-                border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 13, 13, 0.7);
-            backdrop-filter: blur(30px);
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #999;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: #fff;
-            background: rgba(220, 53, 69, 0.1);
-        }
-
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            width: 30px;
-            height: 30px;
-            flex-direction: column;
-            justify-content: space-around;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 100%;
-            height: 2px;
-            background: #dc3545;
-            transition: all 0.3s;
-        }
-
-        /* Main Content */
-        main {
-            position: relative;
-            z-index: 1;
-            padding-top: 80px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        /* Hero Section - Modern Card Style */
+        /* Hero layout */
         .hero {
             margin: 2rem 0;
         }
 
-        .hero-card {
-            background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(139, 0, 0, 0.1) 100%);
-            border-radius: 24px;
-            padding: 4rem;
+        .hero .window-body {
+            padding: 2.5rem 3rem;
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 280px;
             gap: 3rem;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.1), transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content .greeting {
-            font-size: 1rem;
-            color: #999;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            color: #fff;
-            margin-bottom: 0.8rem;
+        .hero-name {
+            font-size: 3.2rem;
             font-weight: 700;
-            line-height: 1.1;
-        }
-
-        .hero-content h2 {
-            font-size: 1.5rem;
-            color: #dc3545;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .hero-content p {
-            line-height: 1.8;
-            color: #aaa;
-            margin-bottom: 2rem;
-            max-width: 550px;
-            font-size: 1rem;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 1rem 2rem;
-            background: #dc3545;
             color: #fff;
-            text-decoration: none;
-            transition: all 0.3s;
+            line-height: 1;
+            margin: 0.8rem 0 0.4rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-name .bracket {
+            color: rgba(220, 53, 69, 0.5);
+            font-weight: 300;
+        }
+
+        .hero-tagline {
             font-size: 0.95rem;
-            border-radius: 12px;
-            font-weight: 500;
-            box-shadow: 0 4px 20px rgba(220, 53, 69, 0.3);
+            color: var(--red);
+            margin-bottom: 1.2rem;
         }
 
-        .cta-button:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(220, 53, 69, 0.4);
+        .hero-bio {
+            font-size: 0.82rem;
+            color: var(--text-mid);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            max-width: 520px;
+            border-left: 2px solid var(--border-red);
+            padding-left: 1rem;
         }
 
+        /* Profile image */
         .hero-image {
             position: relative;
-            z-index: 1;
         }
 
         .profile-pic {
             width: 100%;
-            height: 320px;
-            border-radius: 20px;
-            object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 3rem 0;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .more-link {
-            color: #dc3545;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            height: 280px;
             border-radius: 8px;
-            background: rgba(220, 53, 69, 0.05);
+            object-fit: cover;
+            border: 1px solid var(--border-red);
+            filter: grayscale(20%) contrast(1.05);
         }
 
-        .more-link:hover {
-            background: rgba(220, 53, 69, 0.1);
-            gap: 0.8rem;
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    transparent, transparent 3px,
+                    rgba(220, 53, 69, 0.03) 3px, rgba(220, 53, 69, 0.03) 4px);
+            border-radius: 8px;
+            pointer-events: none;
         }
 
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--red);
+            border-left: 2px solid var(--red);
+            z-index: 1;
+            border-radius: 2px 0 0 0;
         }
 
-        /* Skills Grid - Compact Pills */
-        #skills .grid {
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
+        .img-corner-br {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid var(--red);
+            border-right: 2px solid var(--red);
+            z-index: 1;
+            border-radius: 0 0 2px 0;
         }
 
-        .card {
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-        }
-
-        /* Skill pills */
-        #skills .card {
-            padding: 1.2rem 1rem;
-            text-align: center;
-            background: rgba(30, 30, 30, 0.4);
-            border-radius: 12px;
-        }
-
-        #skills .card h3 {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #ccc;
-        }
-
-        #skills .card:hover {
-            background: rgba(220, 53, 69, 0.1);
-            border-color: rgba(220, 53, 69, 0.3);
-            transform: translateY(-3px);
-        }
-
-        #skills .card:hover h3 {
-            color: #fff;
-        }
-
-        .card:hover {
-            border-color: rgba(220, 53, 69, 0.3);
-            transform: translateY(-5px);
-            background: rgba(30, 30, 30, 0.7);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .card h3 {
-            color: #fff;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .card p {
-            color: #aaa;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .blog-meta {
-            margin-top: 1.2rem;
-            color: #666;
-            font-size: 0.85rem;
-            display: flex;
+        /* Blog list — single column with inline layout */
+        #blog .grid {
+            grid-template-columns: 1fr;
             gap: 0.5rem;
-            align-items: center;
         }
 
-        /* Connect Section */
-        .connect {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: rgba(30, 30, 30, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin: 2rem auto;
-            max-width: 700px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .connect h2 {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-
-        .social-links {
+        #blog .card {
             display: flex;
-            justify-content: center;
-            gap: 1.2rem;
+            align-items: baseline;
+            gap: 1.5rem;
+            padding: 1rem 1.4rem;
         }
 
-        .social-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
-            background: rgba(40, 40, 40, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: #999;
-            font-size: 1.4rem;
+        #blog .card h3 {
+            margin-bottom: 0;
+            font-size: 0.88rem;
+            flex-shrink: 0;
         }
 
-        .social-icon:hover {
-            background: rgba(220, 53, 69, 0.15);
-            border-color: rgba(220, 53, 69, 0.4);
-            color: #dc3545;
-            transform: translateY(-4px);
+        #blog .card p {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            color: #555;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 2rem;
+        #blog .card .blog-meta {
+            margin-top: 0;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
-        /* Loading State */
-        .loading {
-            text-align: center;
-            color: #666;
-            padding: 2rem;
+        #blog .card .card-label {
+            display: none;
         }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            nav {
-                position: fixed;
-                top: 73px;
-                right: -100%;
-                width: 280px;
-                height: calc(100vh - 73px);
-                background: rgba(13, 13, 13, 0.98);
-                backdrop-filter: blur(30px);
-                flex-direction: column;
-                gap: 0;
-                padding: 2rem;
-                border-left: 1px solid rgba(255, 255, 255, 0.05);
-                transition: right 0.3s;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                border-radius: 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .hero-card {
+        @media (max-width: 900px) {
+            .hero .window-body {
                 grid-template-columns: 1fr;
-                padding: 2.5rem;
-                text-align: center;
+                padding: 2rem;
+                gap: 1.5rem;
             }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .hero-name {
+                font-size: 2.2rem;
             }
 
             .hero-image {
                 order: -1;
             }
 
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            #skills .grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            .profile-pic {
+                height: 220px;
             }
         }
 
-        @media (max-width: 640px) {
-            .hero-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.4rem;
-            }
-
-            .social-links {
-                gap: 1rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            #skills .grid {
-                grid-template-columns: repeat(3, 1fr);
+        @media (max-width: 600px) {
+            .hero-name {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Background Graphics -->
+
     <div class="bg-graphics">
         <div class="bg-grid"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
+        <div class="bg-dots"></div>
         <div class="bg-blob"></div>
         <div class="bg-blob"></div>
     </div>
 
-    <!-- Header -->
     <header>
         <a href="index.html" class="logo">KΞLØG</a>
         <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
         <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="blogs.html">Blog</a>
-            <a href="contact.html">Contact</a>
+            <a href="index.html" class="active">home</a>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="blogs.html">blog</a>
+            <a href="contact.html">contact</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
         <div class="container">
-            <!-- Hero Section -->
-            <section id="home" class="hero">
-                <div class="hero-card">
-                    <div class="hero-content">
-                        <div class="greeting">Hi there, I'm</div>
-                        <h1>KELOG</h1>
-                        <h2>Built Curious. Wired Secure.</h2>
-                        <p>I'm a cybersecurity learner driven by curiosity about how systems work — and how they fail. I
-                            like going beyond "how to exploit" into "how it can break", because that's where real
-                            security
-                            begins.</p>
-                        <a href="contact.html" class="cta-button">
-                            Get In Touch
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
+
+            <!-- Hero -->
+            <section class="hero">
+                <div class="window">
+                    <div class="window-bar">
+                        <div class="dot r"></div>
+                        <div class="dot y"></div>
+                        <div class="dot g"></div>
+                        <span class="window-title">~/portfolio — bash</span>
                     </div>
-                    <div class="hero-image">
-                        <img src="/sources/pic.jpg" alt="Profile" class="profile-pic">
+                    <div class="window-body">
+                        <div class="hero-content">
+                            <div style="font-size:0.8rem; color:var(--text-dim); margin-bottom:0.4rem;">Hi there, I'm
+                            </div>
+                            <h1 class="hero-name"><span class="bracket">[</span>KELOG<span class="bracket">]</span></h1>
+                            <div class="hero-tagline">Built Curious. Wired Secure.</div>
+                            <p class="hero-bio">I'm a cybersecurity learner driven by curiosity about how systems work,
+                                and how they fail. I like going beyond "how to exploit" into "how it can break", because
+                                that's where real security begins.</p>
+                            <a href="contact.html" class="cta-button">
+                                Get In Touch
+                                <i class="fas fa-arrow-right" style="font-size:0.7rem"></i>
+                            </a>
+                        </div>
+                        <div class="hero-image">
+                            <img src="/sources/pic.jpg" alt="Profile" class="profile-pic">
+                            <div class="img-corner-br"></div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Skills Section -->
+            <!-- Skills -->
             <section id="skills">
                 <div class="section-header">
-                    <h2 class="section-title">Skills</h2>
+                    <h2 class="section-title">skills</h2>
                 </div>
                 <div class="grid">
-                    <div class="card">
+                    <div class="card" data-lang="OS">
                         <h3>Linux</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="shell">
                         <h3>Bash</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="lang">
                         <h3>Javascript</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="lang">
                         <h3>Python</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="lang">
                         <h3>C</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="lang">
                         <h3>C++</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="lang">
                         <h3>Java</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="web3">
                         <h3>Blockchain</h3>
                     </div>
-                    <div class="card">
+                    <div class="card" data-lang="tool">
                         <h3>Docker</h3>
                     </div>
                 </div>
             </section>
 
-            <!-- Blogs Section -->
+            <!-- Blogs -->
             <section id="blog">
                 <div class="section-header">
-                    <h2 class="section-title">Blogs/Writeups</h2>
-                    <a href="blogs.html" class="more-link">
-                        View All
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <h2 class="section-title">blogs / writeups</h2>
+                    <a href="blogs.html" class="more-link">view all</a>
                 </div>
                 <div class="grid" id="blogsContainer">
-                    <div class="loading">Loading recent blogs...</div>
+                    <div class="loading">fetching recent posts...</div>
                 </div>
             </section>
 
-            <!-- Projects Section -->
+            <!-- Projects -->
             <section id="projects">
                 <div class="section-header">
-                    <h2 class="section-title">My Projects</h2>
-                    <a href="projects.html" class="more-link">
-                        View All
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <h2 class="section-title">projects</h2>
+                    <a href="projects.html" class="more-link">view all</a>
                 </div>
                 <div class="grid">
                     <div class="card">
+                        <div class="card-label">project</div>
                         <h3>Termemul</h3>
                         <p>Web-based terminal simulation built from scratch to understand how command-line interfaces
-                            work internally- from input handling to shell-style command parsing, without relying on real
-                            OS execution.</p>
-                        <div class="blog-meta">January 2026</div>
+                            work internally, from input handling to shell-style command parsing, without relying on
+                            real OS execution.</p>
+                        <div class="blog-meta"><span class="tag">Jan 2026</span></div>
                     </div>
                     <div class="card">
+                        <div class="card-label">project</div>
                         <h3>Traceherb</h3>
-                        <p>This project implements a permissioned blockchain network to ensure traceability,
-                            authenticity, and regulatory compliance in the medicinal plant supply chain.</p>
-                        <div class="blog-meta">September 2025</div>
+                        <p>Implements a permissioned blockchain network to ensure traceability, authenticity, and
+                            regulatory compliance in the medicinal plant supply chain.</p>
+                        <div class="blog-meta"><span class="tag">Sep 2025</span></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Connect Section -->
-            <section id="contact">
+            <!-- Connect -->
+            <section class="connect-section">
                 <div class="connect">
                     <h2>Let's Connect</h2>
                     <div class="social-links">
@@ -738,46 +322,40 @@
                     </div>
                 </div>
             </section>
+
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2026 kelog. Stay curious.</p>
+        <p>© 2026 kelog. Stay <span>curious</span>.</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
         function toggleMenu() {
-            const nav = document.getElementById('nav');
-            nav.classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
         }
 
-        // Load 3 most recent blogs from blogs.json
         async function loadRecentBlogs() {
             try {
                 const response = await fetch('blogs.json');
                 const data = await response.json();
-
                 const recentBlogs = data.blogs.slice(0, 3);
-
                 const container = document.getElementById('blogsContainer');
                 container.innerHTML = '';
-
                 recentBlogs.forEach(blog => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
+                        <div class="card-label">writeup</div>
                         <h3>${blog.title}</h3>
                         <p>${blog.excerpt}</p>
-                        <div class="blog-meta">${blog.date} • ${blog.category}</div>
+                        <div class="blog-meta"><span class="tag">${blog.date}</span>&nbsp;<span class="tag">${blog.category}</span></div>
                     `;
                     card.onclick = () => window.location.href = `blog.html?id=${blog.id}`;
                     container.appendChild(card);
                 });
-            } catch (error) {
-                console.error('Error loading blogs:', error);
-                document.getElementById('blogsContainer').innerHTML = '<div class="loading">Unable to load blogs</div>';
+            } catch (e) {
+                document.getElementById('blogsContainer').innerHTML = '<div class="loading">// no posts found — check back later</div>';
             }
         }
 

@@ -4,578 +4,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | kelog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Contact | kelog</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ── CONTACT PAGE SPECIFIC ── */
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0d0d0d;
-            color: #e8e8e8;
-            overflow-x: hidden;
-        }
-
-        /* Subtle Background Graphics */
-        .bg-graphics {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        /* Mesh gradient background */
-        .bg-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 30%, rgba(220, 53, 69, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 0, 0, 0.06) 0%, transparent 50%);
-        }
-
-        /* Subtle animated orbs */
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-orb:nth-child(2) {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.15), transparent 70%);
-            top: 10%;
-            right: 10%;
-            animation-delay: 0s;
-        }
-
-        .bg-orb:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.12), transparent 70%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 10s;
-        }
-
-        /* Blob Graphics */
-        .bg-blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.5;
-            animation: blobFloat 25s infinite ease-in-out;
-        }
-
-        .bg-blob:nth-child(4) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.35), rgba(220, 53, 69, 0.1) 50%, transparent 70%);
-            top: 50%;
-            right: 5%;
-            border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            animation-delay: 0s;
-        }
-
-        .bg-blob:nth-child(5) {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(255, 69, 78, 0.3), rgba(255, 69, 78, 0.08) 50%, transparent 70%);
-            top: 15%;
-            left: 8%;
-            border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            animation-delay: 8s;
-        }
-
-        .bg-blob:nth-child(6) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.32), rgba(139, 0, 0, 0.1) 50%, transparent 70%);
-            bottom: 10%;
-            right: 25%;
-            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
-            animation-delay: 15s;
-        }
-
-        .bg-blob:nth-child(7) {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, rgba(220, 53, 69, 0.28), rgba(220, 53, 69, 0.08) 50%, transparent 70%);
-            bottom: 35%;
-            left: 3%;
-            border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
-            animation-delay: 20s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            33% {
-                transform: translate(30px, -30px);
-            }
-
-            66% {
-                transform: translate(-20px, 20px);
-            }
-        }
-
-        @keyframes blobFloat {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            }
-
-            25% {
-                transform: translate(30px, -40px) rotate(90deg);
-                border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%;
-            }
-
-            50% {
-                transform: translate(-40px, 30px) rotate(180deg);
-                border-radius: 50% 50% 60% 40% / 60% 40% 60% 40%;
-            }
-
-            75% {
-                transform: translate(20px, 40px) rotate(270deg);
-                border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
-            }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 13, 13, 0.7);
-            backdrop-filter: blur(30px);
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #999;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 1rem;
+        /* Email block */
+        .email-block {
+            background: var(--bg2);
+            border: 1px solid var(--border);
             border-radius: 8px;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: #fff;
-            background: rgba(220, 53, 69, 0.1);
-        }
-
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            width: 30px;
-            height: 30px;
-            flex-direction: column;
-            justify-content: space-around;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 100%;
-            height: 2px;
-            background: #dc3545;
-            transition: all 0.3s;
-        }
-
-        /* Main Content */
-        main {
-            position: relative;
-            z-index: 1;
-            padding-top: 80px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        /* Contact Hero */
-        .contact-hero {
-            min-height: 40vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 3rem 0;
-        }
-
-        .contact-hero h1 {
-            font-size: 3.5rem;
-            color: #fff;
+            padding: 2rem 2.5rem;
             margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .contact-hero p {
-            font-size: 1.1rem;
-            color: #aaa;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Email Section */
-        .email-section {
-            text-align: center;
-            padding: 3rem 2.5rem;
-            background: rgba(30, 30, 30, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin: 3rem 0;
-            transition: all 0.3s;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-        }
-
-        .email-section:hover {
-            border-color: rgba(220, 53, 69, 0.3);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(30, 30, 30, 0.7);
-        }
-
-        .email-section h2 {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .email-section p {
-            color: #aaa;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-
-        .email-link {
-            font-size: 1.5rem;
-            color: #dc3545;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
-            font-weight: 500;
-        }
-
-        .email-link:hover {
-            color: #ff6978;
-            transform: scale(1.02);
-        }
-
-        /* Contact Cards */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0 4rem 0;
-        }
-
-        .contact-card {
-            background: rgba(30, 30, 30, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
+            transition: border-color 0.08s, background 0.08s;
         }
 
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(220, 53, 69, 0.3);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(30, 30, 30, 0.7);
-        }
-
-        .contact-card::before {
+        .email-block::after {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
-            width: 3px;
+            top: 0;
+            width: 2px;
+            height: 0;
+            background: var(--red);
+            transition: height 0.14s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .email-block:hover {
+            border-color: var(--red);
+            background: var(--bg3);
+        }
+
+        .email-block:hover::after {
             height: 100%;
-            background: linear-gradient(180deg, #dc3545, #ff6978);
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
-        .contact-card:hover::before {
-            opacity: 1;
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.2rem;
-            display: block;
-            color: #dc3545;
-        }
-
-        .contact-card h3 {
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 600;
+        .email-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             margin-bottom: 0.5rem;
         }
 
-        .contact-card .handle {
-            color: #666;
-            font-size: 0.9rem;
+        .email-block h2 {
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .email-block .sub {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
             margin-bottom: 1rem;
+        }
+
+        .email-link {
+            font-family: var(--mono);
+            font-size: 0.88rem;
+            color: var(--red);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: color 0.1s;
+        }
+
+        .email-link:hover {
+            color: #fff;
+        }
+
+        /* Contact cards grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.4rem 1.6rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.08s, background 0.08s, box-shadow 0.08s;
+        }
+
+        .contact-card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 0;
+            background: var(--red);
+            transition: height 0.14s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-card:hover {
+            border-color: var(--red);
+            background: var(--bg3);
+            box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.15), 4px 0 20px rgba(220, 53, 69, 0.08);
+        }
+
+        .contact-card:hover::after {
+            height: 100%;
+        }
+
+        .contact-card:hover .contact-name {
+            color: var(--red);
+            transition: color 0.08s;
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+            color: var(--red);
+            margin-bottom: 0.8rem;
             display: block;
         }
 
+        .contact-name {
+            font-family: var(--mono);
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .handle {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
         .contact-card p {
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            color: var(--text-mid);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
         }
 
         .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.5rem;
-            border: 1px solid rgba(220, 53, 69, 0.3);
-            background: rgba(220, 53, 69, 0.05);
-            color: #dc3545;
+            gap: 0.4rem;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid var(--border-red);
+            background: var(--red-dim);
+            color: var(--red);
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-radius: 8px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            border-radius: 4px;
+            transition: background 0.08s, color 0.08s, border-color 0.08s;
         }
 
         .contact-link:hover {
-            background: rgba(220, 53, 69, 0.15);
-            border-color: #dc3545;
+            background: var(--red);
             color: #fff;
-            transform: translateX(3px);
+            border-color: var(--red);
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            color: #555;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            nav {
-                position: fixed;
-                top: 73px;
-                right: -100%;
-                width: 280px;
-                height: calc(100vh - 73px);
-                background: rgba(13, 13, 13, 0.98);
-                backdrop-filter: blur(30px);
-                flex-direction: column;
-                gap: 0;
-                padding: 2rem;
-                border-left: 1px solid rgba(255, 255, 255, 0.05);
-                transition: right 0.3s;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                border-radius: 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .contact-hero h1 {
-                font-size: 2.5rem;
-            }
-
+        @media (max-width: 600px) {
             .contact-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .email-section h2 {
-                font-size: 1.6rem;
-            }
-
-            .email-link {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .contact-hero h1 {
-                font-size: 2rem;
-            }
-
-            .email-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .contact-card {
-                padding: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Background Graphics -->
+
     <div class="bg-graphics">
         <div class="bg-grid"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-orb"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
+        <div class="bg-dots"></div>
         <div class="bg-blob"></div>
         <div class="bg-blob"></div>
     </div>
 
-    <!-- Header -->
     <header>
         <a href="index.html" class="logo">KΞLØG</a>
         <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
         <nav id="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="blogs.html">Blog</a>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="index.html">home</a>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="blogs.html">blog</a>
+            <a href="contact.html" class="active">contact</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
         <div class="container">
-            <!-- Contact Hero -->
-            <section class="contact-hero">
-                <div>
-                    <h1>Let's Connect</h1>
-                    <p>Find me across the web. I'm always open to collaborating, learning, discussing security or even
-                        just a chat!</p>
+
+            <!-- Page Hero -->
+            <section style="padding: 3rem 0 1.5rem;">
+                <div class="window">
+                    <div class="window-bar">
+                        <div class="dot r"></div>
+                        <div class="dot y"></div>
+                        <div class="dot g"></div>
+                        <span class="window-title">~/contact — bash</span>
+                    </div>
+                    <div class="window-body" style="padding: 2rem 3rem;">
+                        <div
+                            style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.6rem;">
+                            contact.txt</div>
+                        <h1
+                            style="font-family:var(--mono); font-size:2.4rem; font-weight:700; color:#fff; margin-bottom:1rem; letter-spacing:-0.5px;">
+                            Let's <span style="color:var(--red)">Connect</span></h1>
+                        <p
+                            style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); max-width:560px; line-height:1.9; border-left:2px solid var(--border-red); padding-left:1rem;">
+                            Always open to collaborating, learning, discussing security or just a chat.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Email Section -->
-            <section class="email-section">
-                <h2>Drop me an email</h2>
-                <p>For inquiries, collaborations, or just to say hi</p>
-                <a href="mailto:ankita.mkumar01@gmail.com" class="email-link">
-                    <i class="far fa-envelope"></i> ankita.mkumar01@gmail.com
+            <!-- Email -->
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">email</h2>
+                </div>
+                <a href="mailto:ankita.mkumar01@gmail.com" class="email-block"
+                    style="display:block; text-decoration:none;">
+                    <div class="email-label">direct mail</div>
+                    <h2>Drop me an email</h2>
+                    <div class="sub">For inquiries, collaborations, or just to say hi</div>
+                    <span class="email-link">
+                        <i class="far fa-envelope"></i>
+                        ankita.mkumar01@gmail.com
+                    </span>
                 </a>
             </section>
 
-            <!-- Social & Platform Links -->
-            <section class="contact-grid">
-                <div class="contact-card">
-                    <i class="fab fa-github contact-icon"></i>
-                    <h3>GitHub</h3>
-                    <span class="handle">@amkx1</span>
-                    <p>Check out my projects, tools, and contributions to open-source security projects.</p>
-                    <a href="https://github.com/amkx1" target="_blank" class="contact-link">
-                        Visit Profile
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+            <!-- Social platforms -->
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">find me on</h2>
                 </div>
-                <div class="contact-card">
-                    <i class="fab fa-x-twitter contact-icon"></i>
-                    <h3>X (Twitter)</h3>
-                    <p>Hit me with a follow!</p>
-                    <a href="https://x.com/ankita01mk" target="_blank" class="contact-link">
-                        Follow
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="contact-card">
-                    <i class="fab fa-discord contact-icon"></i>
-                    <h3>Discord</h3>
-                    <span class="handle">@k3l0g</span>
-                    <p>Let's have security discussions and CTF collaborations. Always up for a chat.</p>
-                    <a href="https://discord.com/users/k3l0g" target="_blank" class="contact-link">
-                        Message
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                <div class="contact-card">
-                    <i class="fas fa-crosshairs contact-icon"></i>
-                    <h3>TryHackMe</h3>
-                    <span class="handle">@Kelog</span>
-                    <p>Track my progress through rooms and challenges. I'm always evolving.</p>
-                    <a href="https://tryhackme.com/p/Kelog" target="_blank" class="contact-link">
-                        View Profile
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                <div class="contact-grid">
+
+                    <div class="contact-card">
+                        <i class="fab fa-github contact-icon"></i>
+                        <div class="contact-name">GitHub</div>
+                        <span class="handle">@amkx1</span>
+                        <p>Projects, tools, and contributions to open-source security work.</p>
+                        <a href="https://github.com/amkx1" target="_blank" class="contact-link">
+                            visit profile <i class="fas fa-arrow-right" style="font-size:0.6rem"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact-card">
+                        <i class="fab fa-x-twitter contact-icon"></i>
+                        <div class="contact-name">X (Twitter)</div>
+                        <span class="handle">@ankita01mk</span>
+                        <p>Hit me with a follow!</p>
+                        <a href="https://x.com/ankita01mk" target="_blank" class="contact-link">
+                            follow <i class="fas fa-arrow-right" style="font-size:0.6rem"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact-card">
+                        <i class="fab fa-discord contact-icon"></i>
+                        <div class="contact-name">Discord</div>
+                        <span class="handle">@k3l0g</span>
+                        <p>Always up for a chat.</p>
+                        <a href="https://discord.com/users/k3l0g" target="_blank" class="contact-link">
+                            message <i class="fas fa-arrow-right" style="font-size:0.6rem"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact-card">
+                        <i class="fas fa-crosshairs contact-icon"></i>
+                        <div class="contact-name">TryHackMe</div>
+                        <span class="handle">@Kelog</span>
+                        <p>Track my progress through rooms and challenges. Always evolving.</p>
+                        <a href="https://tryhackme.com/p/Kelog" target="_blank" class="contact-link">
+                            view profile <i class="fas fa-arrow-right" style="font-size:0.6rem"></i>
+                        </a>
+                    </div>
+
                 </div>
             </section>
+
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2026 kelog. Stay curious.</p>
+        <p>© 2026 kelog. Stay <span>curious</span>.</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
         function toggleMenu() {
-            const nav = document.getElementById('nav');
-            nav.classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
         }
     </script>
 </body>
