@@ -10,94 +10,151 @@
     <link rel="stylesheet" href="style.css">
     <title>About | kelog</title>
     <style>
-        /* ── ABOUT PAGE SPECIFIC ── */
+        /* ── ABOUT-SPECIFIC STYLES ── */
 
-        /* Page hero */
-        .page-hero {
-            padding: 3rem 0 1.5rem;
+        /* Intro block inside hero card */
+        .about-hero-body {
+            padding: 1.4rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .page-hero .window-body {
-            padding: 2.5rem 3rem;
-        }
-
-        .page-hero-label {
-            font-size: 0.72rem;
+        .about-greeting {
+            font-size: 0.68rem;
             color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
         }
 
-        .page-hero h1 {
-            font-family: var(--mono);
-            font-size: 2.4rem;
+        .about-name {
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
+            line-height: 1;
+            color: var(--text);
+            letter-spacing: -1.5px;
+            margin-bottom: 0.45rem;
         }
 
-        .page-hero h1 span {
+        .about-name .bracket {
             color: var(--red);
+            opacity: 0.5;
+            font-weight: 300;
         }
 
-        .page-hero p {
-            font-family: var(--mono);
-            font-size: 0.82rem;
+        .about-tag {
+            font-size: 0.72rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .about-bio {
+            font-size: 0.75rem;
             color: var(--text-mid);
-            max-width: 640px;
             line-height: 1.9;
-            border-left: 2px solid var(--border-red);
-            padding-left: 1rem;
+            max-width: 480px;
+            border-left: 2px solid rgba(220, 30, 50, 0.3);
+            padding-left: 0.9rem;
         }
 
-        /* Timeline */
-        .timeline {
+        .profile-frame {
             position: relative;
-            padding-left: 1.8rem;
-            border-left: 1px solid var(--border-red);
+            flex-shrink: 0;
         }
 
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            filter: grayscale(15%);
+            display: block;
+            background: var(--surface2);
         }
 
-        .timeline-item::before {
-            content: '';
+        .profile-corner {
             position: absolute;
-            left: -2.15rem;
-            top: 0.3rem;
-            width: 8px;
-            height: 8px;
-            background: var(--red);
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+            width: 14px;
+            height: 14px;
+            border-color: var(--red);
+            border-style: solid;
         }
 
-        .timeline-item h4 {
-            font-family: var(--mono);
+        .profile-corner.tl {
+            top: -3px;
+            left: -3px;
+            border-width: 2px 0 0 2px;
+            border-radius: 3px 0 0 0;
+        }
+
+        .profile-corner.br {
+            bottom: -3px;
+            right: -3px;
+            border-width: 0 2px 2px 0;
+            border-radius: 0 0 3px 0;
+        }
+
+        /* Generic section body padding */
+        .section-body {
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* Prose paragraphs inside cards */
+        .prose {
+            font-size: 0.75rem;
+            color: var(--text-mid);
+            line-height: 1.9;
+        }
+
+        .prose+.prose {
+            margin-top: 0.6rem;
+        }
+
+        /* Card label (small caption above heading) */
+        .card-label {
+            font-size: 0.62rem;
+            color: var(--red-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Sub-heading inside a card body */
+        .card-h3 {
             font-size: 0.88rem;
             font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.2rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
         }
 
-        .timeline-item .tl-date {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            margin-bottom: 0.4rem;
-            display: block;
+        /* Two-column grid for cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.8rem;
         }
 
-        .timeline-item p {
-            font-size: 0.78rem;
-            color: var(--text-mid);
-            line-height: 1.8;
+        /* Inline card (used inside card-grid) */
+        .inner-card {
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: 8px;
+            padding: 1rem 1.1rem;
+            transition: all 0.18s;
         }
 
-        /* Focus list inside cards */
+        .inner-card:hover {
+            border-color: var(--border);
+            background: rgba(220, 30, 50, 0.05);
+        }
+
+        /* Focus list */
         .focus-list {
             list-style: none;
             padding: 0;
@@ -105,11 +162,10 @@
         }
 
         .focus-list li {
-            font-family: var(--mono);
-            font-size: 0.78rem;
+            font-size: 0.73rem;
             color: var(--text-mid);
             padding: 0.35rem 0;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border2);
             display: flex;
             align-items: baseline;
             gap: 0.6rem;
@@ -126,38 +182,30 @@
             flex-shrink: 0;
         }
 
-        /* Value cards — 2-col on wide, 1-col on small */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-        }
-
-        /* Stat row */
+        /* Stats row */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            padding: 1rem 1.2rem;
         }
 
         .stat-card {
-            background: var(--bg2);
-            border: 1px solid var(--border);
+            background: var(--surface2);
+            border: 1px solid var(--border2);
             border-radius: 8px;
-            padding: 1.4rem 1rem;
+            padding: 1.2rem 0.8rem;
             text-align: center;
-            transition: border-color 0.08s, background 0.08s;
+            transition: all 0.18s;
         }
 
         .stat-card:hover {
-            border-color: var(--red);
-            background: var(--bg3);
+            border-color: var(--border);
+            background: rgba(220, 30, 50, 0.05);
         }
 
         .stat-number {
-            font-family: var(--mono);
-            font-size: 2rem;
+            font-size: 1.9rem;
             font-weight: 700;
             color: var(--red);
             line-height: 1;
@@ -165,20 +213,96 @@
         }
 
         .stat-label {
-            font-family: var(--mono);
-            font-size: 0.7rem;
+            font-size: 0.63rem;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.08em;
         }
 
-        /* Responsive */
+        /* Timeline (in right col) */
+        .timeline {
+            padding: 1rem 1.2rem;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 1.85rem;
+            top: 1.4rem;
+            bottom: 1rem;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.1rem;
+            position: relative;
+        }
+
+        .tl-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tl-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 8px rgba(220, 30, 50, 0.5);
+            flex-shrink: 0;
+            margin-top: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tl-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tl-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.1rem;
+        }
+
+        .tl-date {
+            font-size: 0.63rem;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .tl-desc {
+            font-size: 0.7rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+        }
+
+        /* Values number label */
+        .value-num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: rgba(220, 30, 50, 0.2);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            font-variant-numeric: tabular-nums;
+        }
+
         @media (max-width: 900px) {
-            .page-hero .window-body {
-                padding: 2rem;
+            .about-hero-body {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .page-hero h1 {
+            .profile-frame {
+                display: none;
+            }
+
+            .about-name {
                 font-size: 1.8rem;
             }
         }
@@ -187,160 +311,271 @@
 
 <body>
 
-    <div class="bg-graphics">
-        <div class="bg-grid"></div>
-        <div class="bg-dots"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-    </div>
+    <canvas id="bg-canvas"></canvas>
 
-    <header>
-        <a href="index.html" class="logo">KΞLØG</a>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
-        <nav id="nav">
-            <a href="index.html">home</a>
-            <a href="about.html" class="active">about</a>
-            <a href="projects.html">projects</a>
-            <a href="blogs.html">blog</a>
-            <a href="contact.html">contact</a>
-        </nav>
-    </header>
+    <div class="shell">
 
-    <main>
-        <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-wrap">
+                <a href="index.html" class="logo">
+                    <div class="logo-dot"></div>
+                    KΞLØG
+                </a>
+            </div>
 
-            <!-- Page Hero -->
-            <section class="page-hero">
-                <div class="window">
-                    <div class="window-bar">
-                        <div class="dot r"></div>
-                        <div class="dot y"></div>
-                        <div class="dot g"></div>
-                        <span class="window-title">~/about — bash</span>
-                    </div>
-                    <div class="window-body">
-                        <div class="page-hero-label">about.txt</div>
-                        <h1>About <span>Me</span></h1>
-                        <p>I'm kelog (she/her) - a cybersecurity student and enthusiast eager to understand the
-                            fundamentals of breaking and securing systems. Currently in my second year of university,
-                            pursuing a degree in cybersecurity.</p>
-                    </div>
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <a href="index.html" class="nav-item"><i class="fas fa-house"></i> home</a>
+                <a href="about.html" class="nav-item active"><i class="fas fa-user"></i> about</a>
+                <a href="projects.html" class="nav-item"><i class="fas fa-code-branch"></i> projects</a>
+                <a href="blogs.html" class="nav-item"><i class="fas fa-file-lines"></i> blog</a>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar-sm">K</div>
+                <div class="footer-info">
+                    <div class="footer-name">kelog</div>
+                    <div class="footer-sub">cybersec / engineer</div>
                 </div>
-            </section>
+            </div>
+        </aside>
 
-            <!-- Who I Am -->
-            <section>
-                <div class="section-header">
-                    <h2 class="section-title">who am i</h2>
-                </div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-label">origin</div>
-                        <h3>The Journey</h3>
-                        <p>My fascination with cybersecurity started with a simple question: "How does this actually
-                            work?" That curiosity led me down a path from understanding basic network protocols to
-                            diving deep into exploitation techniques.</p>
-                        <p style="margin-top:0.8rem;">I believe the best way to secure a system is to understand how it
-                            can be broken. This mindset drives my approach to learning and building.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">mindset</div>
-                        <h3>The Philosophy</h3>
-                        <p>Security isn't just about finding vulnerabilities, it's about understanding the entire
-                            ecosystem. Every system has its weak points, and discovering them requires patience,
-                            creativity, and a willingness to see things differently.</p>
-                        <p style="margin-top:0.8rem;">Constantly learning, constantly breaking things (in controlled
-                            environments), and constantly asking "what if?"</p>
-                    </div>
-                </div>
-            </section>
+        <!-- MAIN -->
+        <div class="main">
 
-            <!-- What I Do -->
-            <section>
-                <div class="section-header">
-                    <h2 class="section-title">what i do</h2>
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-title">About</div>
+                <div class="topbar-right">
+                    <a href="contact.html" class="pill"><i class="fas fa-envelope"></i> contact me</a>
                 </div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-label">offensive</div>
-                        <h3>Offensive Security</h3>
-                        <ul class="focus-list">
-                            <li>Web application security testing</li>
-                            <li>Network reconnaissance and enumeration</li>
-                            <li>Vulnerability analysis and exploitation</li>
-                            <li>CTF-based attack simulations</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">defensive</div>
-                        <h3>Defensive Security</h3>
-                        <ul class="focus-list">
-                            <li>Secure backend and API practices</li>
-                            <li>Threat detection and log analysis</li>
-                            <li>System and network hardening basics</li>
-                            <li>Understanding attack mitigation techniques</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">research</div>
-                        <h3>Research & Learning</h3>
-                        <ul class="focus-list">
-                            <li>Reverse engineering fundamentals</li>
-                            <li>Malware analysis and detection</li>
-                            <li>Security tool scripting and development</li>
-                            <li>CTF competitions and writeups</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+            </div>
 
-            <!-- Core Values -->
-            <section>
-                <div class="section-header">
-                    <h2 class="section-title">core values</h2>
-                </div>
-                <div class="values-grid">
-                    <div class="card">
-                        <div class="card-label">01</div>
-                        <h3>Ethical Practice</h3>
-                        <p>All security research and testing is conducted ethically and legally. I believe in
-                            responsible disclosure and using knowledge to build, not destroy.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">02</div>
-                        <h3>Continuous Learning</h3>
-                        <p>The security landscape evolves daily. Staying curious and committed to learning is not
-                            optional, it's essential.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">03</div>
-                        <h3>Community Contribution</h3>
-                        <p>Sharing knowledge through writeups, blogs, and open-source tools helps the entire community
-                            grow stronger.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-label">04</div>
-                        <h3>Question Everything</h3>
-                        <p>Every system can be improved. Every assumption can be challenged. This mindset drives
-                            innovation in security.</p>
-                    </div>
-                </div>
-            </section>
+            <!-- TWO-COLUMN CONTENT -->
+            <div class="content">
 
-        </div>
-    </main>
+                <!-- LEFT COLUMN -->
+                <div class="col-left">
 
-    <footer>
-        <p>© 2026 kelog. Stay <span>curious</span>.</p>
-    </footer>
+                    <!-- HERO / INTRO -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-terminal"></i> cat ~/portfolio/aboutme.txt</div>
+                            <div class="tab-row">
+                                <button class="tab active">info</button>
+                            </div>
+                        </div>
+                        <div class="about-hero-body">
+                            <div>
+
+                                <p class="about-bio">I'm kelog (she/her) - a cybersecurity student and enthusiast eager
+                                    to understand the
+                                    fundamentals of breaking and securing systems. Currently in my second year of
+                                    university,
+                                    pursuing a degree in cybersecurity.</p>
+                            </div>
+                            <div class="profile-frame">
+                                <img src="/sources/pic.jpg" alt="Profile" class="profile-pic">
+                                <div class="profile-corner tl"></div>
+                                <div class="profile-corner br"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUICK STATS -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-chart-simple"></i> quick stats</div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stat-card">
+                                <div class="stat-number">2nd</div>
+                                <div class="stat-label">Year @ Uni</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">∞</div>
+                                <div class="stat-label">Curiosity</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">TOP 5%</div>
+                                <div class="stat-label">On THM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHO I AM -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-id-card"></i> who am i</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="card-grid">
+                                <div class="inner-card">
+                                    <div class="card-label">origin</div>
+                                    <div class="card-h3">The Journey</div>
+                                    <p class="prose">My fascination with cybersecurity started with a simple question:
+                                        "How does this actually work?" That curiosity led me from understanding basic
+                                        network protocols to diving deep into exploitation techniques.</p>
+                                    <p class="prose">I believe the best way to secure a system is to understand how it
+                                        can be broken. This mindset drives my approach to learning and building.</p>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="card-label">mindset</div>
+                                    <div class="card-h3">The Philosophy</div>
+                                    <p class="prose">Security isn't just about finding vulnerabilities — it's about
+                                        understanding the entire ecosystem. Every system has its weak points, and
+                                        discovering them requires patience, creativity, and a willingness to see things
+                                        differently.</p>
+                                    <p class="prose">Constantly learning, constantly breaking things (in controlled
+                                        environments), and constantly asking "what if?"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT I DO -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-shield-halved"></i> what i do</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="card-grid">
+                                <div class="inner-card">
+                                    <div class="card-label">offensive</div>
+                                    <div class="card-h3">Offensive Security</div>
+                                    <ul class="focus-list">
+                                        <li>Web application security testing</li>
+                                        <li>Network reconnaissance & enumeration</li>
+                                        <li>Vulnerability analysis and exploitation</li>
+                                        <li>CTF-based attack simulations</li>
+                                    </ul>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="card-label">defensive</div>
+                                    <div class="card-h3">Defensive Security</div>
+                                    <ul class="focus-list">
+                                        <li>Secure backend and API practices</li>
+                                        <li>Threat detection and log analysis</li>
+                                        <li>System and network hardening basics</li>
+                                        <li>Understanding attack mitigation techniques</li>
+                                    </ul>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="card-label">research</div>
+                                    <div class="card-h3">Research & Learning</div>
+                                    <ul class="focus-list">
+                                        <li>Reverse engineering fundamentals</li>
+                                        <li>Malware analysis and detection</li>
+                                        <li>Security tool scripting and development</li>
+                                        <li>CTF competitions and writeups</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CORE VALUES -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-circle-nodes"></i> core values</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="card-grid">
+                                <div class="inner-card">
+                                    <div class="value-num">01</div>
+                                    <div class="card-h3">Ethical Practice</div>
+                                    <p class="prose">All security research and testing is conducted ethically and
+                                        legally. Responsible disclosure and using knowledge to build, not destroy.</p>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="value-num">02</div>
+                                    <div class="card-h3">Continuous Learning</div>
+                                    <p class="prose">The security landscape evolves daily. Staying curious and
+                                        committed to learning is not optional — it's essential.</p>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="value-num">03</div>
+                                    <div class="card-h3">Community Contribution</div>
+                                    <p class="prose">Sharing knowledge through writeups, blogs, and open-source tools
+                                        helps the entire community grow stronger.</p>
+                                </div>
+                                <div class="inner-card">
+                                    <div class="value-num">04</div>
+                                    <div class="card-h3">Question Everything</div>
+                                    <p class="prose">Every system can be improved. Every assumption can be challenged.
+                                        This mindset drives innovation in security.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /col-left -->
+
+
+
+            </div><!-- /content -->
+
+            <footer class="footer">
+                <span>© 2026 kelog. Stay <span style="color:var(--red)">curious</span>.</span>
+                <span>Built Curious. Wired Secure.</span>
+            </footer>
+
+        </div><!-- /main -->
+    </div><!-- /shell -->
 
     <script>
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
-        }
+        /* BACKGROUND: floating grid dots — identical to index.html */
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+            const RED = '220,30,50';
+
+            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+            function makeParticles() {
+                particles = [];
+                const count = Math.floor((W * H) / 22000);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        r: Math.random() * 1.2 + 0.3,
+                        vx: (Math.random() - 0.5) * 0.15,
+                        vy: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.4 + 0.1,
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.strokeStyle = `rgba(${RED},0.04)`;
+                ctx.lineWidth = 1;
+                const gs = 60;
+                for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+                for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${RED},${p.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            resize(); makeParticles(); draw();
+            window.addEventListener('resize', () => { resize(); makeParticles(); });
+        })();
     </script>
+
 </body>
 
 </html>

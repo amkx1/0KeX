@@ -10,266 +10,342 @@
     <link rel="stylesheet" href="style.css">
     <title>Projects | kelog</title>
     <style>
-        /* ── PROJECTS PAGE SPECIFIC ── */
+        /* ── PROJECTS-SPECIFIC ── */
 
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .project-card {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            transition: border-color 0.08s, background 0.08s, box-shadow 0.08s;
             display: flex;
             flex-direction: column;
+            gap: 0.6rem;
         }
 
-        /* Same left-bar snap as .card */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 0;
-            background: var(--red);
-            transition: height 0.14s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
+        .project-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.1rem;
+            border-radius: 7px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            transition: all 0.18s;
+            position: relative;
         }
 
-        .project-card:hover {
-            border-color: var(--red);
-            background: var(--bg3);
-            box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.15), 4px 0 20px rgba(220, 53, 69, 0.08);
+        .project-row:hover {
+            border-color: rgba(220, 30, 50, 0.3);
+            background: rgba(220, 30, 50, 0.05);
+            transform: translateX(2px);
         }
 
-        .project-card:hover::before {
-            height: 100%;
-        }
-
-        .project-card:hover .project-title {
-            color: var(--red);
-            transition: color 0.08s;
-        }
-
-        /* Icon banner */
-        .project-image {
-            width: 100%;
-            height: 120px;
-            background: var(--bg3);
-            border-bottom: 1px solid var(--border);
+        .proj-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: rgba(220, 30, 50, 0.1);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            position: relative;
-            overflow: hidden;
+            color: var(--red);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
         }
 
-        /* Subtle red tint on the banner */
-        .project-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(220, 53, 69, 0.06), transparent 60%);
-        }
-
-        .project-content {
-            padding: 1.4rem 1.6rem;
+        .proj-info {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            min-width: 0;
         }
 
-        .project-meta {
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-family: var(--mono);
-        }
-
-        .project-title {
-            font-family: var(--mono);
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .project-desc {
-            font-family: var(--mono);
-            font-size: 0.78rem;
-            color: var(--text-mid);
-            line-height: 1.8;
-            flex: 1;
-        }
-
-        .project-footer {
+        .proj-name-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-top: 0.8rem;
-            border-top: 1px solid var(--border);
-            margin-top: auto;
+            margin-bottom: 0.3rem;
+            gap: 1rem;
         }
 
-        .project-date {
-            font-family: var(--mono);
-            font-size: 0.68rem;
+        .proj-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .proj-date {
+            font-size: 0.63rem;
             color: var(--text-dim);
+            flex-shrink: 0;
         }
 
-        .project-links {
+        .proj-desc {
+            font-size: 0.72rem;
+            color: var(--text-mid);
+            line-height: 1.75;
+            margin-bottom: 0.7rem;
+        }
+
+        .proj-footer {
             display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
 
-        .project-link {
+        .proj-link {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.3rem 0.7rem;
-            border: 1px solid var(--border-red);
-            background: var(--red-dim);
-            color: var(--red);
-            text-decoration: none;
-            font-family: var(--mono);
-            font-size: 0.72rem;
+            padding: 0.28rem 0.65rem;
+            border: 1px solid var(--border);
             border-radius: 4px;
-            transition: background 0.08s, color 0.08s, border-color 0.08s;
+            background: var(--surface);
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 0.67rem;
+            transition: all 0.18s;
         }
 
-        .project-link:hover {
-            background: var(--red);
-            color: #fff;
-            border-color: var(--red);
+        .proj-link:hover {
+            border-color: var(--red-dim);
+            color: var(--text);
+            background: rgba(220, 30, 50, 0.07);
         }
 
-        @media (max-width: 900px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+        .proj-link.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .proj-link i {
+            font-size: 0.7rem;
+        }
+
+        /* page intro inside hero card */
+        .page-intro {
+            padding: 1.4rem;
+        }
+
+        .page-intro-greeting {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .page-intro-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-intro-title span {
+            color: var(--red);
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .page-intro-sub {
+            font-size: 0.73rem;
+            color: var(--text-mid);
+            line-height: 1.8;
+            border-left: 2px solid rgba(220, 30, 50, 0.3);
+            padding-left: 0.9rem;
+            max-width: 480px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="bg-graphics">
-        <div class="bg-grid"></div>
-        <div class="bg-dots"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-    </div>
+    <canvas id="bg-canvas"></canvas>
 
-    <header>
-        <a href="index.html" class="logo">KΞLØG</a>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
-        <nav id="nav">
-            <a href="index.html">home</a>
-            <a href="about.html">about</a>
-            <a href="projects.html" class="active">projects</a>
-            <a href="blogs.html">blog</a>
-            <a href="contact.html">contact</a>
-        </nav>
-    </header>
+    <div class="shell">
 
-    <main>
-        <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-wrap">
+                <a href="index.html" class="logo">
+                    <div class="logo-dot"></div>
+                    KΞLØG
+                </a>
+            </div>
 
-            <!-- Page Hero -->
-            <section class="page-hero" style="padding: 3rem 0 1.5rem;">
-                <div class="window">
-                    <div class="window-bar">
-                        <div class="dot r"></div>
-                        <div class="dot y"></div>
-                        <div class="dot g"></div>
-                        <span class="window-title">~/projects — bash</span>
-                    </div>
-                    <div class="window-body" style="padding: 2rem 3rem;">
-                        <div
-                            style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.6rem;">
-                            projects.txt</div>
-                        <h1
-                            style="font-family:var(--mono); font-size:2.4rem; font-weight:700; color:#fff; margin-bottom:1rem; letter-spacing:-0.5px;">
-                            My <span style="color:var(--red)">Projects</span></h1>
-                        <p
-                            style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); max-width:560px; line-height:1.9; border-left:2px solid var(--border-red); padding-left:1rem;">
-                            Things I've worked on from tools to research. </p>
-                    </div>
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <a href="index.html" class="nav-item"><i class="fas fa-house"></i> home</a>
+                <a href="about.html" class="nav-item"><i class="fas fa-user"></i> about</a>
+                <a href="projects.html" class="nav-item active"><i class="fas fa-code-branch"></i> projects</a>
+                <a href="blogs.html" class="nav-item"><i class="fas fa-file-lines"></i> blog</a>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar-sm">K</div>
+                <div class="footer-info">
+                    <div class="footer-name">kelog</div>
+                    <div class="footer-sub">cybersec / engineer</div>
                 </div>
-            </section>
+            </div>
+        </aside>
 
-            <!-- Projects Grid -->
-            <section>
-                <div class="section-header">
-                    <h2 class="section-title">all projects</h2>
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-title">Projects</div>
+                <div class="topbar-right">
+                    <a href="contact.html" class="pill"><i class="fas fa-envelope"></i> contact me</a>
                 </div>
-                <div class="projects-grid">
+            </div>
 
-                    <div class="project-card">
-                        <div class="project-image">🔧</div>
-                        <div class="project-content">
+            <!-- CONTENT -->
+            <div class="content" style="display:flex;flex-direction:column;gap:1.2rem;">
 
-                            <div class="project-title">Termemul</div>
-                            <p class="project-desc">Web-based terminal simulation built from scratch to understand how
-                                command-line interfaces work internally — from input handling to shell-style command
-                                parsing, without relying on real OS execution.</p>
-                            <div class="project-footer">
-                                <span class="project-date">January 2026</span>
-                                <div class="project-links">
-                                    <a href="https://github.com/amkx1/termemul" target="_blank" class="project-link">
-                                        <i class="fab fa-github"></i> source
-                                    </a>
-                                </div>
-                            </div>
+                <!-- INTRO CARD -->
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title"><i class="fas fa-terminal"></i> ls ~/portfolio/projects/</div>
+                        <div class="tab-row">
+                            <button class="tab active">all</button>
                         </div>
                     </div>
+                    <div class="page-intro">
+                        <div class="page-intro-greeting">// things I've built</div>
+                        <div class="page-intro-title">My Projects</div>
+                        <p class="page-intro-sub">From security tools to research prototypes — everything here is built
+                            out of curiosity and a need to understand how things actually work.</p>
+                    </div>
+                </div>
 
-                    <div class="project-card">
-                        <div class="project-image">🔬</div>
-                        <div class="project-content">
+                <!-- PROJECTS LIST CARD -->
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title"><i class="fas fa-code"></i> all projects</div>
+                        <span style="font-size:0.65rem;color:var(--text-dim);">3 entries</span>
+                    </div>
+                    <div style="padding:0.8rem 1.2rem;">
+                        <div class="projects-grid">
 
-                            <div class="project-title">Traceherb</div>
-                            <p class="project-desc">Implements a permissioned blockchain network to ensure traceability,
-                                authenticity, and regulatory compliance in the medicinal plant supply chain.</p>
-                            <div class="project-footer">
-                                <span class="project-date">September 2025</span>
-                                <div class="project-links">
-                                    <a href="https://github.com/amkx1/Traceherb-Techies" target="_blank"
-                                        class="project-link">
-                                        <i class="fab fa-github"></i> source
-                                    </a>
+                            <!-- IntelliDNS -->
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-shield-halved"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">IntelliDNS</div>
+                                        <div class="proj-date">March 2026</div>
+                                    </div>
+                                    <p class="proj-desc">AI-based DNS security system that monitors network-wide DNS
+                                        traffic in real time and blocks malicious domains before a connection is
+                                        established. Designed for fast, low-latency protection across all devices on the
+                                        network without requiring any per-device installation.</p>
+                                    <div class="proj-footer">
+                                        <a class="proj-link disabled"><i class="fab fa-github"></i> source — coming
+                                            soon</a>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Termemul -->
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-terminal"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">Termemul</div>
+                                        <div class="proj-date">January 2026</div>
+                                    </div>
+                                    <p class="proj-desc">Web-based terminal simulation built from scratch to understand
+                                        how command-line interfaces work internally — from input handling to shell-style
+                                        command parsing, without relying on real OS execution.</p>
+                                    <div class="proj-footer">
+                                        <a href="https://github.com/amkx1/termemul" target="_blank" class="proj-link">
+                                            <i class="fab fa-github"></i> source
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Traceherb -->
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-seedling"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">Traceherb</div>
+                                        <div class="proj-date">September 2025</div>
+                                    </div>
+                                    <p class="proj-desc">Implements a permissioned blockchain network to ensure
+                                        traceability, authenticity, and regulatory compliance in the medicinal plant
+                                        supply chain.</p>
+                                    <div class="proj-footer">
+                                        <a href="https://github.com/amkx1/Traceherb-Techies" target="_blank"
+                                            class="proj-link">
+                                            <i class="fab fa-github"></i> source
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
-            </section>
 
-        </div>
-    </main>
+            </div><!-- /content -->
 
-    <footer>
-        <p>© 2026 kelog. Stay <span>curious</span>.</p>
-    </footer>
+            <footer class="footer">
+                <span>© 2026 kelog. Stay <span style="color:var(--red)">curious</span>.</span>
+                <span>Built Curious. Wired Secure.</span>
+            </footer>
+
+        </div><!-- /main -->
+    </div><!-- /shell -->
 
     <script>
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
-        }
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+            const RED = '220,30,50';
+
+            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+            function makeParticles() {
+                particles = [];
+                const count = Math.floor((W * H) / 22000);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        r: Math.random() * 1.2 + 0.3,
+                        vx: (Math.random() - 0.5) * 0.15,
+                        vy: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.4 + 0.1,
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.strokeStyle = `rgba(${RED},0.04)`;
+                ctx.lineWidth = 1;
+                const gs = 60;
+                for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+                for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${RED},${p.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            resize(); makeParticles(); draw();
+            window.addEventListener('resize', () => { resize(); makeParticles(); });
+        })();
     </script>
+
 </body>
 
 </html>

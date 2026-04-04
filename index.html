@@ -5,172 +5,750 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>kelog</title>
+    <title>kelog - Built Curious. Wired Secure.</title>
     <style>
-        /* ── INDEX-SPECIFIC ONLY ── */
-
-        /* Hero layout */
-        .hero {
-            margin: 2rem 0;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .hero .window-body {
-            padding: 2.5rem 3rem;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 3rem;
-            align-items: center;
+        :root {
+            --bg: #0a0a0b;
+            --surface: #111114;
+            --surface2: #161619;
+            --border: rgba(220, 30, 50, 0.15);
+            --border2: rgba(220, 30, 50, 0.08);
+            --red: #dc1e32;
+            --red-dim: rgba(220, 30, 50, 0.6);
+            --red-glow: rgba(220, 30, 50, 0.12);
+            --red-soft: rgba(220, 30, 50, 0.07);
+            --text: #f0f0f2;
+            --text-mid: #9a9aaa;
+            --text-dim: #4a4a5a;
+            --font: 'JetBrains Mono', monospace;
         }
 
-        .hero-name {
-            font-size: 3.2rem;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1;
-            margin: 0.8rem 0 0.4rem;
-            letter-spacing: -1px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .hero-name .bracket {
-            color: rgba(220, 53, 69, 0.5);
-            font-weight: 300;
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 13px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .hero-tagline {
-            font-size: 0.95rem;
-            color: var(--red);
-            margin-bottom: 1.2rem;
-        }
-
-        .hero-bio {
-            font-size: 0.82rem;
-            color: var(--text-mid);
-            line-height: 1.9;
-            margin-bottom: 2rem;
-            max-width: 520px;
-            border-left: 2px solid var(--border-red);
-            padding-left: 1rem;
-        }
-
-        /* Profile image */
-        .hero-image {
-            position: relative;
-        }
-
-        .profile-pic {
-            width: 100%;
-            height: 280px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--border-red);
-            filter: grayscale(20%) contrast(1.05);
-        }
-
-        .hero-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg,
-                    transparent, transparent 3px,
-                    rgba(220, 53, 69, 0.03) 3px, rgba(220, 53, 69, 0.03) 4px);
-            border-radius: 8px;
+        /* CANVAS */
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.45;
         }
 
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            width: 20px;
-            height: 20px;
-            border-top: 2px solid var(--red);
-            border-left: 2px solid var(--red);
+        /* SHELL */
+        .shell {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            min-height: 100vh;
+            position: relative;
             z-index: 1;
-            border-radius: 2px 0 0 0;
         }
 
-        .img-corner-br {
-            position: absolute;
-            bottom: -4px;
-            right: -4px;
-            width: 20px;
-            height: 20px;
-            border-bottom: 2px solid var(--red);
-            border-right: 2px solid var(--red);
-            z-index: 1;
-            border-radius: 0 0 2px 0;
+        /* SIDEBAR */
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+            background: var(--surface);
+            overflow: hidden;
         }
 
-        /* Blog list — single column with inline layout */
-        #blog .grid {
-            grid-template-columns: 1fr;
+        .logo-wrap {
+            padding: 1.6rem 1.4rem 1.2rem;
+            border-bottom: 1px solid var(--border2);
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
 
-        #blog .card {
-            display: flex;
-            align-items: baseline;
-            gap: 1.5rem;
-            padding: 1rem 1.4rem;
-        }
-
-        #blog .card h3 {
-            margin-bottom: 0;
-            font-size: 0.88rem;
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 8px var(--red);
             flex-shrink: 0;
+            animation: pulse-dot 2.4s ease-in-out infinite;
         }
 
-        #blog .card p {
-            color: var(--text-dim);
-            font-size: 0.75rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--red);
+            }
+
+            50% {
+                opacity: .5;
+                box-shadow: 0 0 3px var(--red);
+            }
+        }
+
+        .nav-section {
+            padding: 1.2rem 0.6rem 0.4rem;
             flex: 1;
         }
 
-        #blog .card .blog-meta {
-            margin-top: 0;
+        .nav-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 400;
+            transition: all 0.18s;
+            margin-bottom: 0.15rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            width: 14px;
+            text-align: center;
+            font-size: 0.72rem;
+        }
+
+        .nav-item:hover {
+            color: var(--text);
+            background: var(--red-soft);
+        }
+
+        .nav-item.active {
+            color: var(--text);
+            background: rgba(220, 30, 50, 0.14);
+            font-weight: 500;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 2px;
+            background: var(--red);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .sidebar-footer {
+            padding: 1rem 1.4rem;
+            border-top: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .avatar-sm {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), #600010);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
             flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .footer-info {
+            min-width: 0;
+        }
+
+        .footer-name {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .footer-sub {
+            font-size: 0.62rem;
+            color: var(--text-dim);
+        }
+
+        /* MAIN */
+        .main {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 2rem;
+            border-bottom: 1px solid var(--border2);
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .topbar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--text-mid);
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.18s;
+            text-decoration: none;
+        }
+
+        .pill:hover {
+            border-color: var(--red-dim);
+            color: var(--text);
+        }
+
+        .pill i {
+            font-size: 0.65rem;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-mid);
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.18s;
+        }
+
+        .icon-btn:hover {
+            color: var(--text);
+            border-color: var(--red-dim);
+        }
+
+        /* CONTENT — two independent flex columns */
+        .content {
+            padding: 1.6rem 2rem;
+            flex: 1;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .col-left {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .col-right {
+            width: 280px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(220, 30, 50, 0.3);
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.2rem 0.8rem;
+            border-bottom: 1px solid var(--border2);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-title i {
+            color: var(--red);
+            font-size: 0.72rem;
+        }
+
+        .tab-row {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .tab {
+            padding: 0.25rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: var(--font);
+            background: none;
+            border: none;
+            text-decoration: none;
+        }
+
+        .tab.active,
+        .tab:hover {
+            background: var(--red-soft);
+            color: var(--text);
+        }
+
+        .tab.active {
+            color: var(--red);
+        }
+
+        /* HERO */
+        .hero-body {
+            padding: 1.4rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-greeting {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-name {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text);
+            letter-spacing: -1.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-name .bracket {
+            color: var(--red);
+            opacity: 0.5;
+            font-weight: 300;
+        }
+
+        .hero-tag {
+            font-size: 0.72rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-bio {
+            font-size: 0.75rem;
+            color: var(--text-mid);
+            line-height: 1.9;
+            max-width: 480px;
+            border-left: 2px solid rgba(220, 30, 50, 0.3);
+            padding-left: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            background: var(--red);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-family: var(--font);
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: #b81828;
+            transform: translateY(-1px);
+        }
+
+        .profile-frame {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            filter: grayscale(15%);
+            display: block;
+            background: var(--surface2);
+        }
+
+        .profile-corner {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: var(--red);
+            border-style: solid;
+        }
+
+        .profile-corner.tl {
+            top: -3px;
+            left: -3px;
+            border-width: 2px 0 0 2px;
+            border-radius: 3px 0 0 0;
+        }
+
+        .profile-corner.br {
+            bottom: -3px;
+            right: -3px;
+            border-width: 0 2px 2px 0;
+            border-radius: 0 0 3px 0;
+        }
+
+        /* SKILLS */
+        .skills-body {
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.55rem 0.7rem;
+            border-radius: 6px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            transition: all 0.18s;
+        }
+
+        .skill-row:hover {
+            border-color: var(--border);
+            background: rgba(220, 30, 50, 0.05);
+        }
+
+        .skill-label {
+            font-size: 0.72rem;
+            color: var(--text-mid);
+            font-weight: 400;
+            min-width: 70px;
+            flex: 1;
+        }
+
+        .skill-tag {
+            font-size: 0.6rem;
+            color: var(--red-dim);
+            border: 1px solid var(--border);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            background: var(--red-soft);
             white-space: nowrap;
         }
 
-        #blog .card .card-label {
-            display: none;
+        /* PROJECTS */
+        .projects-body {
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
-        /* Responsive */
+        .project-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 7px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+
+        .project-row:hover {
+            border-color: var(--border);
+            background: rgba(220, 30, 50, 0.05);
+            transform: translateX(2px);
+        }
+
+        .proj-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+            background: rgba(220, 30, 50, 0.1);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .proj-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .proj-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .proj-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .proj-desc {
+            font-size: 0.7rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .proj-date {
+            font-size: 0.62rem;
+            color: var(--text-dim);
+            flex-shrink: 0;
+        }
+
+        /* BLOGS */
+        .blogs-body {
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .blog-row {
+            padding: 0.75rem 0.9rem;
+            border-radius: 6px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+
+        .blog-row:hover {
+            border-color: var(--border);
+            background: rgba(220, 30, 50, 0.05);
+        }
+
+        .blog-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .blog-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .blog-badge {
+            font-size: 0.58rem;
+            color: var(--red);
+            border: 1px solid rgba(220, 30, 50, 0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            background: var(--red-soft);
+            white-space: nowrap;
+        }
+
+        .blog-excerpt {
+            font-size: 0.67rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .loading-text {
+            padding: 1rem 1.2rem;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        /* CONNECT */
+        .connect-body {
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .connect-label {
+            font-size: 0.7rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1rem;
+            border-radius: 7px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.18s;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .social-link:hover {
+            border-color: var(--red-dim);
+            color: var(--text);
+            background: rgba(220, 30, 50, 0.07);
+        }
+
+        .social-link i {
+            font-size: 0.8rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+        }
+
+        /* MOBILE */
         @media (max-width: 900px) {
-            .hero .window-body {
+            .shell {
                 grid-template-columns: 1fr;
-                padding: 2rem;
-                gap: 1.5rem;
             }
 
-            .hero-name {
-                font-size: 2.2rem;
+            .sidebar {
+                display: none;
             }
 
-            .hero-image {
-                order: -1;
+            .content {
+                flex-direction: column;
+                padding: 1rem;
             }
 
-            .profile-pic {
-                height: 220px;
+            .col-right {
+                width: 100%;
             }
-        }
 
-        @media (max-width: 600px) {
             .hero-name {
                 font-size: 1.8rem;
+            }
+
+            .hero-body {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .profile-frame {
+                display: none;
+            }
+
+            .social-row {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -178,189 +756,294 @@
 
 <body>
 
-    <div class="bg-graphics">
-        <div class="bg-grid"></div>
-        <div class="bg-dots"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-    </div>
+    <canvas id="bg-canvas"></canvas>
 
-    <header>
-        <a href="index.html" class="logo">KΞLØG</a>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
-        <nav id="nav">
-            <a href="index.html" class="active">home</a>
-            <a href="about.html">about</a>
-            <a href="projects.html">projects</a>
-            <a href="blogs.html">blog</a>
-            <a href="contact.html">contact</a>
-        </nav>
-    </header>
+    <div class="shell">
 
-    <main>
-        <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-wrap">
+                <a href="index.html" class="logo">
+                    <div class="logo-dot"></div>
+                    KΞLØG
+                </a>
+            </div>
 
-            <!-- Hero -->
-            <section class="hero">
-                <div class="window">
-                    <div class="window-bar">
-                        <div class="dot r"></div>
-                        <div class="dot y"></div>
-                        <div class="dot g"></div>
-                        <span class="window-title">~/portfolio — bash</span>
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <a href="index.html" class="nav-item active"><i class="fas fa-house"></i> home</a>
+                <a href="about.html" class="nav-item"><i class="fas fa-user"></i> about</a>
+                <a href="projects.html" class="nav-item"><i class="fas fa-code-branch"></i> projects</a>
+                <a href="blogs.html" class="nav-item"><i class="fas fa-file-lines"></i> blog</a>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar-sm">K</div>
+                <div class="footer-info">
+                    <div class="footer-name">kelog</div>
+                    <div class="footer-sub">cybersec / engineer</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-title">Portfolio</div>
+                <div class="topbar-right">
+                    <div class="pill"><i class="fas fa-circle" style="color:var(--red);font-size:0.5rem"></i> Available
                     </div>
-                    <div class="window-body">
-                        <div class="hero-content">
-                            <div style="font-size:0.8rem; color:var(--text-dim); margin-bottom:0.4rem;">Hi there, I'm
+                    <a href="contact.html" class="pill"><i class="fas fa-envelope"></i> contact me</a>
+                    <div class="icon-btn" id="shareBtn" onclick="copyLink()" title="Copy link">
+                        <i class="fas fa-share-nodes" id="shareIcon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWO-COLUMN CONTENT -->
+            <div class="content">
+
+                <!-- LEFT COLUMN -->
+                <div class="col-left">
+
+                    <!-- HERO -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-terminal"></i> cat ~/portfolio/hello.txt</div>
+                            <div class="tab-row">
+                                <button class="tab">v4.2</button>
                             </div>
-                            <h1 class="hero-name"><span class="bracket">[</span>KELOG<span class="bracket">]</span></h1>
-                            <div class="hero-tagline">Built Curious. Wired Secure.</div>
-                            <p class="hero-bio">I'm a cybersecurity learner driven by curiosity about how systems work,
-                                and how they fail. I like going beyond "how to exploit" into "how it can break", because
-                                that's where real security begins.</p>
-                            <a href="contact.html" class="cta-button">
-                                Get In Touch
-                                <i class="fas fa-arrow-right" style="font-size:0.7rem"></i>
-                            </a>
                         </div>
-                        <div class="hero-image">
-                            <img src="/sources/pic.jpg" alt="Profile" class="profile-pic">
-                            <div class="img-corner-br"></div>
+                        <div class="hero-body">
+                            <div class="hero-content">
+                                <div class="hero-greeting">// Hi there, I'm</div>
+                                <h1 class="hero-name">KELOG</h1>
+                                <div class="hero-tag">Built Curious. Wired Secure.</div>
+                                <p class="hero-bio">I'm a cybersecurity learner driven by curiosity about how systems
+                                    work,
+                                    and how they fail. I like going beyond "how to exploit" into "how it can break",
+                                    because
+                                    that's where real security begins.</p>
+                            </div>
+                            <div class="profile-frame">
+                                <img src="/sources/pic.jpg" alt="Profile" class="profile-pic">
+                                <div class="profile-corner tl"></div>
+                                <div class="profile-corner br"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Skills -->
-            <section id="skills">
-                <div class="section-header">
-                    <h2 class="section-title">skills</h2>
-                </div>
-                <div class="grid">
-                    <div class="card" data-lang="OS">
-                        <h3>Linux</h3>
-                    </div>
-                    <div class="card" data-lang="shell">
-                        <h3>Bash</h3>
-                    </div>
-                    <div class="card" data-lang="lang">
-                        <h3>Javascript</h3>
-                    </div>
-                    <div class="card" data-lang="lang">
-                        <h3>Python</h3>
-                    </div>
-                    <div class="card" data-lang="lang">
-                        <h3>C</h3>
-                    </div>
-                    <div class="card" data-lang="lang">
-                        <h3>C++</h3>
-                    </div>
-                    <div class="card" data-lang="lang">
-                        <h3>Java</h3>
-                    </div>
-                    <div class="card" data-lang="web3">
-                        <h3>Blockchain</h3>
-                    </div>
-                    <div class="card" data-lang="tool">
-                        <h3>Docker</h3>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Blogs -->
-            <section id="blog">
-                <div class="section-header">
-                    <h2 class="section-title">blogs / writeups</h2>
-                    <a href="blogs.html" class="more-link">view all</a>
-                </div>
-                <div class="grid" id="blogsContainer">
-                    <div class="loading">fetching recent posts...</div>
-                </div>
-            </section>
-
-            <!-- Projects -->
-            <section id="projects">
-                <div class="section-header">
-                    <h2 class="section-title">projects</h2>
-                    <a href="projects.html" class="more-link">view all</a>
-                </div>
-                <div class="grid">
+                    <!-- BLOGS -->
                     <div class="card">
-                        <div class="card-label">project</div>
-                        <h3>Termemul</h3>
-                        <p>Web-based terminal simulation built from scratch to understand how command-line interfaces
-                            work internally, from input handling to shell-style command parsing, without relying on
-                            real OS execution.</p>
-                        <div class="blog-meta"><span class="tag">Jan 2026</span></div>
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-newspaper"></i> blogs / writeups</div>
+                            <a href="blogs.html" class="tab" style="text-decoration:none">view all →</a>
+                        </div>
+                        <div class="blogs-body" id="blogsContainer">
+                            <div class="loading-text">// fetching recent posts...</div>
+                        </div>
                     </div>
+
+                    <!-- CONNECT -->
                     <div class="card">
-                        <div class="card-label">project</div>
-                        <h3>Traceherb</h3>
-                        <p>Implements a permissioned blockchain network to ensure traceability, authenticity, and
-                            regulatory compliance in the medicinal plant supply chain.</p>
-                        <div class="blog-meta"><span class="tag">Sep 2025</span></div>
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-satellite-dish"></i> let's connect</div>
+                        </div>
+                        <div class="connect-body">
+                            <div class="connect-label">Find me across the web —</div>
+                            <div class="social-row">
+                                <a href="https://github.com/amkx1" target="_blank" class="social-link"><i
+                                        class="fab fa-github"></i> GitHub</a>
+                                <a href="https://x.com/ankita01mk" target="_blank" class="social-link"><i
+                                        class="fab fa-x-twitter"></i> X</a>
+                                <a href="https://discord.com/users/k3l0g" target="_blank" class="social-link"><i
+                                        class="fab fa-discord"></i> Discord</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Connect -->
-            <section class="connect-section">
-                <div class="connect">
-                    <h2>Let's Connect</h2>
-                    <div class="social-links">
-                        <a href="https://github.com/amkx1" target="_blank" class="social-icon" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://x.com/ankita01mk" target="_blank" class="social-icon" title="X (Twitter)">
-                            <i class="fab fa-x-twitter"></i>
-                        </a>
-                        <a href="https://discord.com/users/k3l0g" target="_blank" class="social-icon" title="Discord">
-                            <i class="fab fa-discord"></i>
-                        </a>
+                </div><!-- /col-left -->
+
+                <!-- RIGHT COLUMN -->
+                <div class="col-right">
+
+                    <!-- SKILLS -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-layer-group"></i> skills</div>
+                        </div>
+                        <div class="skills-body">
+                            <div class="skill-row"><span class="skill-label">Linux</span><span
+                                    class="skill-tag">OS</span></div>
+                            <div class="skill-row"><span class="skill-label">Bash</span><span
+                                    class="skill-tag">shell</span></div>
+                            <div class="skill-row"><span class="skill-label">Python</span><span
+                                    class="skill-tag">lang</span></div>
+                            <div class="skill-row"><span class="skill-label">JavaScript</span><span
+                                    class="skill-tag">lang</span></div>
+                            <div class="skill-row"><span class="skill-label">C / C++</span><span
+                                    class="skill-tag">lang</span></div>
+                            <div class="skill-row"><span class="skill-label">Java</span><span
+                                    class="skill-tag">lang</span></div>
+                            <div class="skill-row"><span class="skill-label">Docker</span><span
+                                    class="skill-tag">tool</span></div>
+                            <div class="skill-row"><span class="skill-label">Blockchain</span><span
+                                    class="skill-tag">web3</span></div>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-        </div>
-    </main>
+                    <!-- PROJECTS -->
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-title"><i class="fas fa-code"></i> projects</div>
+                            <a href="projects.html" class="tab" style="text-decoration:none">view all →</a>
+                        </div>
+                        <div class="projects-body">
 
-    <footer>
-        <p>© 2026 kelog. Stay <span>curious</span>.</p>
-    </footer>
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-shield-halved"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">IntelliDNS</div>
+                                        <div class="proj-date">Mar 2026</div>
+                                    </div>
+                                    <div class="proj-desc">AI-based DNS security system that detects and blocks
+                                        malicious domains in real time across the network.</div>
+                                </div>
+                            </div>
+
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-terminal"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">Termemul</div>
+                                        <div class="proj-date">Jan 2026</div>
+                                    </div>
+                                    <div class="proj-desc">Web-based terminal simulation built from scratch to
+                                        understand how CLIs work internally.</div>
+                                </div>
+                            </div>
+
+                            <div class="project-row">
+                                <div class="proj-icon"><i class="fas fa-seedling"></i></div>
+                                <div class="proj-info">
+                                    <div class="proj-name-row">
+                                        <div class="proj-name">Traceherb</div>
+                                        <div class="proj-date">Sep 2025</div>
+                                    </div>
+                                    <div class="proj-desc">Permissioned blockchain for traceability and compliance in
+                                        the medicinal plant supply chain.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- /col-right -->
+
+            </div><!-- /content -->
+
+            <footer class="footer">
+                <span>© 2026 kelog. Stay <span style="color:var(--red)">curious</span>.</span>
+                <span>Built Curious. Wired Secure.</span>
+            </footer>
+
+        </div><!-- /main -->
+    </div><!-- /shell -->
 
     <script>
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
+        /* BACKGROUND: floating grid dots */
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+            const RED = '220,30,50';
+
+            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+            function makeParticles() {
+                particles = [];
+                const count = Math.floor((W * H) / 22000);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        r: Math.random() * 1.2 + 0.3,
+                        vx: (Math.random() - 0.5) * 0.15,
+                        vy: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.4 + 0.1,
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.strokeStyle = `rgba(${RED},0.04)`;
+                ctx.lineWidth = 1;
+                const gs = 60;
+                for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+                for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${RED},${p.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            resize(); makeParticles(); draw();
+            window.addEventListener('resize', () => { resize(); makeParticles(); });
+        })();
+
+        //share-link
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = document.getElementById('shareBtn');
+                const icon = document.getElementById('shareIcon');
+                icon.className = 'fas fa-check';
+                btn.style.borderColor = 'var(--red)';
+                btn.style.color = 'var(--text)';
+                setTimeout(() => {
+                    icon.className = 'fas fa-share-nodes';
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
         }
 
+        /* LOAD BLOGS */
         async function loadRecentBlogs() {
+            const container = document.getElementById('blogsContainer');
             try {
                 const response = await fetch('blogs.json');
                 const data = await response.json();
-                const recentBlogs = data.blogs.slice(0, 3);
-                const container = document.getElementById('blogsContainer');
+                const recent = data.blogs.slice(0, 3);
                 container.innerHTML = '';
-                recentBlogs.forEach(blog => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="card-label">writeup</div>
-                        <h3>${blog.title}</h3>
-                        <p>${blog.excerpt}</p>
-                        <div class="blog-meta"><span class="tag">${blog.date}</span>&nbsp;<span class="tag">${blog.category}</span></div>
-                    `;
-                    card.onclick = () => window.location.href = `blog.html?id=${blog.id}`;
-                    container.appendChild(card);
+                recent.forEach(blog => {
+                    const row = document.createElement('div');
+                    row.className = 'blog-row';
+                    row.innerHTML = `
+            <div class="blog-top">
+              <span class="blog-title">${blog.title}</span>
+              <span class="blog-badge">${blog.category}</span>
+            </div>
+            <div class="blog-excerpt">${blog.excerpt}</div>
+          `;
+                    row.onclick = () => window.location.href = `blog.html?id=${blog.id}`;
+                    container.appendChild(row);
                 });
             } catch (e) {
-                document.getElementById('blogsContainer').innerHTML = '<div class="loading">// no posts found — check back later</div>';
+                container.innerHTML = '<div class="loading-text">// no posts found — check back later</div>';
             }
         }
-
         loadRecentBlogs();
     </script>
+
 </body>
 
 </html>

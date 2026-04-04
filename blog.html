@@ -39,67 +39,89 @@
             line-height: 1.7;
         }
 
-        /* ── HEADER ── */
-        header {
+        /* ── TOPBAR ── */
+        .site-topbar {
             position: fixed;
             top: 0;
             width: 100%;
+            height: 54px;
             background: rgba(14, 14, 14, 0.9);
             backdrop-filter: blur(16px);
-            padding: 0 5%;
-            height: 54px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 2rem;
             z-index: 1000;
-            border-bottom: 1px solid var(--border);
         }
 
-        .logo {
+        .site-logo {
             font-family: var(--mono);
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             color: #fff;
             text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        nav {
             display: flex;
-            gap: 0.2rem;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        nav a {
+        .site-logo-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 8px var(--red);
+            flex-shrink: 0;
+            animation: pulse-dot 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--red);
+            }
+
+            50% {
+                opacity: .5;
+                box-shadow: 0 0 3px var(--red);
+            }
+        }
+
+        .site-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .site-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            border-radius: 20px;
+            font-size: 0.7rem;
             font-family: var(--mono);
-            color: var(--text-dim);
+            color: var(--text-mid);
+            background: rgba(20, 20, 20, 0.8);
+            cursor: pointer;
+            transition: all 0.18s;
             text-decoration: none;
-            font-size: 0.78rem;
-            padding: 0.3rem 0.75rem;
-            border-radius: 4px;
-            transition: all 0.15s;
-            border: 1px solid transparent;
         }
 
-        nav a:hover,
-        nav a.active {
+        .site-pill:hover {
+            border-color: rgba(220, 53, 69, 0.5);
             color: #fff;
             background: var(--red-dim);
-            border-color: var(--border-red);
         }
 
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 26px;
-            height: 26px;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 100%;
-            height: 1.5px;
-            background: var(--red);
+        .site-pill i {
+            font-size: 0.62rem;
+            color: var(--red);
         }
 
         /* ── LAYOUT ── */
@@ -190,7 +212,6 @@
             max-width: 680px;
         }
 
-        /* Back link */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -211,7 +232,6 @@
             font-size: 0.65rem;
         }
 
-        /* Blog header */
         .blog-header {
             margin-bottom: 3rem;
         }
@@ -268,7 +288,6 @@
             border-radius: 3px;
         }
 
-        /* Divider */
         .header-rule {
             border: none;
             height: 1px;
@@ -276,7 +295,7 @@
             margin: 2rem 0;
         }
 
-        /* ── PROSE CONTENT ── */
+        /* ── PROSE ── */
         .blog-content {
             font-family: var(--prose);
             font-size: 1rem;
@@ -321,7 +340,6 @@
             border-bottom-color: var(--red);
         }
 
-        /* Inline code */
         .blog-content code {
             font-family: var(--mono);
             font-size: 0.83rem;
@@ -332,7 +350,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* Code blocks */
         .code-block {
             position: relative;
             margin: 1.8rem 0;
@@ -349,9 +366,9 @@
             padding: 0.45rem 1rem;
             background: #161616;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
 
-        /* Traffic light dots */
         .code-dots {
             display: flex;
             gap: 0.35rem;
@@ -419,7 +436,6 @@
             overflow-x: auto;
             line-height: 1.7;
             margin: 0;
-            border-radius: 0;
         }
 
         .blog-content pre code {
@@ -439,7 +455,6 @@
             border-radius: 2px;
         }
 
-        /* Lists */
         .blog-content ul,
         .blog-content ol {
             margin-left: 1.4rem;
@@ -454,7 +469,6 @@
             color: var(--red);
         }
 
-        /* Blockquote */
         .blog-content blockquote {
             border-left: 2px solid rgba(220, 53, 69, 0.35);
             padding: 0.8rem 1.4rem;
@@ -469,7 +483,6 @@
             margin-bottom: 0;
         }
 
-        /* HR */
         .blog-content hr {
             border: none;
             height: 1px;
@@ -477,7 +490,6 @@
             margin: 2.5rem 0;
         }
 
-        /* Images */
         .blog-content img {
             max-width: 100%;
             height: auto;
@@ -521,34 +533,8 @@
                 font-size: 1.6rem;
             }
 
-            nav {
-                position: fixed;
-                top: 54px;
-                right: -100%;
-                width: 240px;
-                height: calc(100vh - 54px);
-                background: rgba(14, 14, 14, 0.98);
-                backdrop-filter: blur(16px);
-                flex-direction: column;
-                gap: 0;
-                padding: 1.5rem;
-                border-left: 1px solid var(--border);
-                transition: right 0.3s;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav a {
-                padding: 0.8rem 1rem;
-                border-bottom: 1px solid var(--border);
-                border-radius: 0;
-                font-size: 0.82rem;
-            }
-
-            .menu-toggle {
-                display: flex;
+            .site-topbar {
+                padding: 0 1rem;
             }
         }
     </style>
@@ -556,27 +542,20 @@
 
 <body>
 
-    <header>
-        <a href="index.html" class="logo">KΞLØG</a>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+    <!-- TOPBAR -->
+    <div class="site-topbar">
+        <a href="index.html" class="site-logo">
+            KΞLØG
+        </a>
+        <div class="site-topbar-right">
+            <a href="blogs.html" class="site-pill"><i class="fas fa-arrow-left"></i> back to blogs</a>
+            <a href="contact.html" class="site-pill"><i class="fas fa-envelope"></i> contact me</a>
         </div>
-        <nav id="nav">
-            <a href="index.html">home</a>
-            <a href="about.html">about</a>
-            <a href="projects.html">projects</a>
-            <a href="blogs.html" class="active">blog</a>
-            <a href="contact.html">contact</a>
-        </nav>
-    </header>
+    </div>
 
     <main>
         <!-- Content -->
         <div class="content-wrapper">
-
-            <a href="blogs.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> back to blogs
-            </a>
 
             <div class="blog-header">
                 <div class="blog-meta">
@@ -593,7 +572,7 @@
 
         </div>
 
-        <!-- TOC — right side -->
+        <!-- TOC -->
         <aside class="toc-sidebar" id="toc">
             <div class="toc-title">On this page</div>
             <ul class="toc-list" id="tocList"></ul>
@@ -605,10 +584,6 @@
     </footer>
 
     <script>
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
-        }
-
         function generateTOC() {
             const content = document.getElementById('blogContent');
             const tocList = document.getElementById('tocList');
@@ -668,7 +643,6 @@
 
                 const header = document.createElement('div');
                 header.className = 'code-header';
-                header.style.position = 'relative';
                 header.innerHTML = `
                     <div class="code-dots">
                         <span class="code-dot r"></span>
@@ -689,8 +663,7 @@
 
         function copyCode(btn) {
             const pre = btn.closest('.code-block').querySelector('pre');
-            const text = pre.innerText;
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(pre.innerText).then(() => {
                 btn.innerHTML = '<i class="fas fa-check"></i> copied';
                 btn.classList.add('copied');
                 setTimeout(() => {

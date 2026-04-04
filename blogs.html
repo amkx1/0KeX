@@ -10,101 +10,98 @@
     <link rel="stylesheet" href="style.css">
     <title>Blogs | kelog</title>
     <style>
-        /* ── BLOGS PAGE SPECIFIC ── */
+        /* ── BLOGS-SPECIFIC ── */
 
-        .blogs-wrap {
-            padding-bottom: 4rem;
+        .page-intro {
+            padding: 1.4rem;
         }
 
-        /* ── CATEGORY GROUP ── */
-        .category-group {
-            margin-bottom: 1.6rem;
+        .page-intro-greeting {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
         }
 
-        /* Directory-style header */
-        .category-toggle {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 0.3rem 0;
+        .page-intro-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-intro-title span {
+            color: var(--red);
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .page-intro-sub {
+            font-size: 0.73rem;
+            color: var(--text-mid);
+            line-height: 1.8;
+            border-left: 2px solid rgba(220, 30, 50, 0.3);
+            padding-left: 0.9rem;
+            max-width: 480px;
+        }
+
+        /* ── CATEGORY CARD HEADER (clickable toggle) ── */
+        .category-card-head {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            justify-content: space-between;
+            padding: 1rem 1.2rem 0.8rem;
+            border-bottom: 1px solid var(--border2);
             cursor: pointer;
-            transition: none;
-        }
-
-        /* Arrow: ▶ closed, ▼ open */
-        .dir-arrow {
-            font-family: var(--mono);
-            font-size: 0.6rem;
-            color: var(--red);
-            width: 10px;
-            flex-shrink: 0;
-            transition: none;
             user-select: none;
+            transition: background 0.15s;
         }
 
-        .category-group.open .dir-arrow::before {
-            content: '▼';
+        .category-card-head:hover {
+            background: var(--red-soft);
         }
 
-        .category-group:not(.open) .dir-arrow::before {
-            content: '▶';
-        }
-
-        .dir-folder {
-            font-family: var(--mono);
+        .category-card-head .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 0.8rem;
-            color: var(--yellow);
-        }
-
-        .category-group.open .dir-folder::before {
-            content: '📂 ';
-            font-size: 0.75rem;
-        }
-
-        .category-group:not(.open) .dir-folder::before {
-            content: '📁 ';
-            font-size: 0.75rem;
-        }
-
-        .category-name {
-            font-family: var(--mono);
-            font-size: 0.82rem;
             font-weight: 600;
-            color: var(--yellow);
-            letter-spacing: 0.5px;
+            color: var(--text);
         }
 
-        .category-toggle:hover .category-name {
-            color: #fff;
+        .category-card-head .card-title i.folder-icon {
+            color: var(--red);
+            font-size: 0.72rem;
+            transition: transform 0.2s;
         }
 
-        .category-toggle:hover .dir-folder {
-            opacity: 0.8;
+        .dir-arrow {
+            font-size: 0.55rem;
+            color: var(--red);
+            transition: transform 0.2s;
         }
 
-        .category-count {
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            margin-left: 0.2rem;
+        /* When card is closed, rotate arrow and swap folder icon */
+        .category-card.closed .dir-arrow {
+            transform: rotate(-90deg);
+        }
+
+        .category-card.closed .folder-icon {
+            /* closed folder */
         }
 
         /* ── COLLAPSIBLE BODY ── */
         .category-body {
-            max-height: 0;
+            max-height: 2000px;
             overflow: hidden;
-            transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Tree indent line */
-            margin-left: 0.85rem;
-            padding-left: 1.1rem;
-            border-left: 1px solid rgba(220, 53, 69, 0.2);
+            transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .category-group.open .category-body {
-            max-height: 2000px;
+        .category-card.closed .category-body {
+            max-height: 0;
         }
 
         /* ── BLOG ROW ── */
@@ -113,26 +110,15 @@
             grid-template-columns: 1fr auto;
             align-items: baseline;
             gap: 1rem;
-            padding: 0.55rem 0.6rem;
+            padding: 0.6rem 1.2rem;
             cursor: pointer;
-            position: relative;
-            transition: background 0.08s;
-            border-radius: 4px;
-        }
-
-        /* file icon prefix */
-        .blog-row-title::before {
-            content: '├─ ';
-            color: var(--text-dim);
-            font-size: 0.72rem;
-        }
-
-        .blog-row:last-child .blog-row-title::before {
-            content: '└─ ';
+            border-radius: 6px;
+            transition: all 0.15s;
+            margin-bottom: 0.1rem;
         }
 
         .blog-row:hover {
-            background: rgba(220, 53, 69, 0.05);
+            background: rgba(220, 30, 50, 0.05);
         }
 
         .blog-row:hover .blog-row-title {
@@ -146,45 +132,50 @@
             min-width: 0;
         }
 
+        .blog-row-prefix {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-right: 0.3rem;
+        }
+
         .blog-row-title {
-            font-family: var(--mono);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: var(--text);
-            transition: color 0.08s;
+            transition: color 0.15s;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .blog-row-excerpt {
-            font-family: var(--mono);
-            font-size: 0.7rem;
+            font-size: 0.67rem;
             color: var(--text-dim);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-left: 2.1rem;
+            padding-left: 1.1rem;
         }
 
         .blog-row-date {
-            font-family: var(--mono);
-            font-size: 0.66rem;
+            font-size: 0.63rem;
             color: var(--text-dim);
             white-space: nowrap;
             flex-shrink: 0;
         }
 
-        /* Empty state */
-        .no-results {
-            font-family: var(--mono);
-            font-size: 0.78rem;
-            color: var(--text-dim);
-            padding: 3rem 0;
-            text-align: center;
+        .blog-rows-wrap {
+            padding: 0.5rem 0;
         }
 
-        .no-results::before {
+        /* Empty / loading */
+        .status-text {
+            padding: 1.5rem 1.2rem;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        .status-text::before {
             content: '// ';
             color: var(--red);
         }
@@ -203,91 +194,161 @@
 
 <body>
 
-    <div class="bg-graphics">
-        <div class="bg-grid"></div>
-        <div class="bg-dots"></div>
-        <div class="bg-blob"></div>
-        <div class="bg-blob"></div>
-    </div>
+    <canvas id="bg-canvas"></canvas>
 
-    <header>
-        <a href="index.html" class="logo">KΞLØG</a>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
-        <nav id="nav">
-            <a href="index.html">home</a>
-            <a href="about.html">about</a>
-            <a href="projects.html">projects</a>
-            <a href="blogs.html" class="active">blog</a>
-            <a href="contact.html">contact</a>
-        </nav>
-    </header>
+    <div class="shell">
 
-    <main>
-        <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-wrap">
+                <a href="index.html" class="logo">
+                    <div class="logo-dot"></div>
+                    KΞLØG
+                </a>
+            </div>
 
-            <!-- Page Hero -->
-            <section style="padding: 3rem 0 1.5rem;">
-                <div class="window">
-                    <div class="window-bar">
-                        <div class="dot r"></div>
-                        <div class="dot y"></div>
-                        <div class="dot g"></div>
-                        <span class="window-title">~/blogs — bash</span>
+            <div class="nav-section">
+                <div class="nav-label">Menu</div>
+                <a href="index.html" class="nav-item"><i class="fas fa-house"></i> home</a>
+                <a href="about.html" class="nav-item"><i class="fas fa-user"></i> about</a>
+                <a href="projects.html" class="nav-item"><i class="fas fa-code-branch"></i> projects</a>
+                <a href="blogs.html" class="nav-item active"><i class="fas fa-file-lines"></i> blog</a>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar-sm">K</div>
+                <div class="footer-info">
+                    <div class="footer-name">kelog</div>
+                    <div class="footer-sub">cybersec / engineer</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-title">Blog</div>
+                <div class="topbar-right">
+                    <a href="contact.html" class="pill"><i class="fas fa-envelope"></i> contact me</a>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content" style="flex-direction:column;gap:1.2rem;align-items:stretch;">
+
+                <!-- INTRO CARD -->
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title"><i class="fas fa-terminal"></i> ls ~/portfolio/blogs/</div>
+                        <span id="totalCount" style="font-size:0.65rem;color:var(--text-dim);"></span>
                     </div>
-                    <div class="window-body" style="padding: 2rem 3rem;">
-                        <div
-                            style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.6rem;">
-                            blogs.txt</div>
-                        <h1
-                            style="font-family:var(--mono); font-size:2.4rem; font-weight:700; color:#fff; margin-bottom:1rem; letter-spacing:-0.5px;">
-                            Blogs & <span style="color:var(--red)">Writeups</span></h1>
-                        <p
-                            style="font-family:var(--mono); font-size:0.82rem; color:var(--text-mid); max-width:560px; line-height:1.9; border-left:2px solid var(--border-red); padding-left:1rem;">
-                            I share what I learn here ;)</p>
+                    <div class="page-intro">
+                        <div class="page-intro-greeting">// the archives</div>
+                        <div class="page-intro-title">Blogs & Writeups</div>
+                        <p class="page-intro-sub">I share what I learn here ;)</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- Blog list -->
-            <section style="padding: 1rem 0 2rem;">
-                <div class="section-header">
-                    <h2 class="section-title">all posts</h2>
-                    <span id="totalCount"
-                        style="font-family:var(--mono); font-size:0.7rem; color:var(--text-dim);"></span>
+                <!-- CATEGORY CARDS injected here -->
+                <div id="blogList" style="display:flex;flex-direction:column;gap:1.2rem;">
+                    <div class="card">
+                        <div class="status-text">fetching posts...</div>
+                    </div>
                 </div>
 
-                <div class="blogs-wrap">
-                    <div id="blogList"></div>
-                    <div id="noResults" class="no-results" style="display:none;">no posts found</div>
+                <div id="noResults" style="display:none;">
+                    <div class="card">
+                        <div class="status-text">no posts found</div>
+                    </div>
                 </div>
-            </section>
 
-        </div>
-    </main>
+            </div><!-- /content -->
 
-    <footer>
-        <p>© 2026 kelog. Stay <span>curious</span>.</p>
-    </footer>
+            <footer class="footer">
+                <span>© 2026 kelog. Stay <span style="color:var(--red)">curious</span>.</span>
+                <span>Built Curious. Wired Secure.</span>
+            </footer>
+
+        </div><!-- /main -->
+    </div><!-- /shell -->
 
     <script>
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
+        /* BACKGROUND CANVAS */
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+            const RED = '220,30,50';
+
+            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+            function makeParticles() {
+                particles = [];
+                const count = Math.floor((W * H) / 22000);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        r: Math.random() * 1.2 + 0.3,
+                        vx: (Math.random() - 0.5) * 0.15,
+                        vy: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.4 + 0.1,
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.strokeStyle = `rgba(${RED},0.04)`;
+                ctx.lineWidth = 1;
+                const gs = 60;
+                for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+                for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${RED},${p.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            resize(); makeParticles(); draw();
+            window.addEventListener('resize', () => { resize(); makeParticles(); });
+        })();
+
+        /* TOGGLE */
+        function toggleCard(head) {
+            head.closest('.category-card').classList.toggle('closed');
+            const folderIcon = head.querySelector('.folder-icon');
+            const isClosed = head.closest('.category-card').classList.contains('closed');
+            folderIcon.className = isClosed
+                ? 'fas fa-folder folder-icon'
+                : 'fas fa-folder-open folder-icon';
         }
 
+        /* BLOG LOADER */
         async function loadBlogs() {
+            const list = document.getElementById('blogList');
+            const noResults = document.getElementById('noResults');
+
             try {
                 const response = await fetch('blogs.json');
                 const data = await response.json();
                 const blogs = data.blogs;
 
                 if (!blogs || blogs.length === 0) {
-                    document.getElementById('noResults').style.display = 'block';
+                    list.style.display = 'none';
+                    noResults.style.display = 'block';
                     return;
                 }
 
-                document.getElementById('totalCount').textContent = `${blogs.length} post${blogs.length !== 1 ? 's' : ''}`;
+                document.getElementById('totalCount').textContent =
+                    `${blogs.length} post${blogs.length !== 1 ? 's' : ''}`;
 
                 // Group by category
                 const grouped = {};
@@ -296,49 +357,52 @@
                     grouped[blog.category].push(blog);
                 });
 
-                const list = document.getElementById('blogList');
                 list.innerHTML = '';
 
                 Object.entries(grouped).forEach(([category, posts]) => {
-                    const group = document.createElement('div');
-                    group.className = 'category-group open';
+                    const card = document.createElement('div');
+                    card.className = 'card category-card'; // open by default
 
-                    group.innerHTML = `
-                        <button class="category-toggle" onclick="toggleGroup(this)">
-                            <span class="dir-arrow"></span>
-                            <span class="dir-folder"></span>
-                            <span class="category-name">${category}/</span>
-                            <span class="category-count">(${posts.length})</span>
-                        </button>
+                    card.innerHTML = `
+                        <div class="category-card-head" onclick="toggleCard(this)">
+                            <div class="card-title">
+                                <i class="fas fa-folder-open folder-icon"></i> ${category}/
+                            </div>
+                            <div style="display:flex;align-items:center;gap:0.8rem;">
+                                <span style="font-size:0.65rem;color:var(--text-dim);">${posts.length} post${posts.length !== 1 ? 's' : ''}</span>
+                                <i class="fas fa-chevron-down dir-arrow"></i>
+                            </div>
+                        </div>
                         <div class="category-body">
-                            ${posts.map((blog, idx) => `
-                                <div class="blog-row" onclick="window.location.href='blog.html?id=${blog.id}'">
-                                    <div class="blog-row-left">
-                                        <span class="blog-row-title">${blog.title}</span>
-                                        <span class="blog-row-excerpt">${blog.excerpt}</span>
+                            <div class="blog-rows-wrap">
+                                ${posts.map((blog, idx) => `
+                                    <div class="blog-row" onclick="window.location.href='blog.html?id=${blog.id}'">
+                                        <div class="blog-row-left">
+                                            <span class="blog-row-title">
+                                                <span class="blog-row-prefix">${idx === posts.length - 1 ? '└─' : '├─'}</span>
+                                                ${blog.title}
+                                            </span>
+                                            <span class="blog-row-excerpt">${blog.excerpt}</span>
+                                        </div>
+                                        <span class="blog-row-date">${blog.date}</span>
                                     </div>
-                                    <span class="blog-row-date">${blog.date}</span>
-                                </div>
-                            `).join('')}
+                                `).join('')}
+                            </div>
                         </div>
                     `;
 
-                    list.appendChild(group);
+                    list.appendChild(card);
                 });
 
             } catch (e) {
-                document.getElementById('noResults').style.display = 'block';
-                document.getElementById('noResults').textContent = 'could not load posts';
+                list.style.display = 'none';
+                noResults.style.display = 'block';
             }
-        }
-
-        function toggleGroup(btn) {
-            const group = btn.closest('.category-group');
-            group.classList.toggle('open');
         }
 
         loadBlogs();
     </script>
+
 </body>
 
 </html>
