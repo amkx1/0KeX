@@ -306,10 +306,95 @@
                 font-size: 1.8rem;
             }
         }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 52px;
+                padding: 0 1.2rem;
+                background: rgba(10, 10, 11, 0.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+                z-index: 100;
+            }
+
+            .shell {
+                padding-top: 52px;
+            }
+
+            .mobile-logo {
+                font-size: 1rem;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                color: var(--text);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .mobile-logo-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: var(--red);
+                box-shadow: 0 0 8px var(--red);
+                animation: pulse-dot 2.4s ease-in-out infinite;
+            }
+
+            .mobile-nav-links {
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+            }
+
+            .mobile-nav-links a {
+                width: 34px;
+                height: 34px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                color: var(--text-mid);
+                text-decoration: none;
+                font-size: 0.8rem;
+                transition: all 0.15s;
+            }
+
+            .mobile-nav-links a:hover,
+            .mobile-nav-links a.active {
+                color: var(--text);
+                background: var(--red-soft);
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav">
+        <a href="index.html" class="mobile-logo">
+            <div class="mobile-logo-dot"></div>
+            KΞLØG
+        </a>
+        <div class="mobile-nav-links">
+            <a href="index.html"><i class="fas fa-house"></i></a>
+            <a href="about.html"><i class="fas fa-user"></i></a>
+            <a href="projects.html"><i class="fas fa-code-branch"></i></a>
+            <a href="blogs.html"><i class="fas fa-file-lines"></i></a>
+            <a href="contact.html"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
 
     <canvas id="bg-canvas"></canvas>
 
