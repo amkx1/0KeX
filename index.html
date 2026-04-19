@@ -214,6 +214,17 @@
             color: var(--text-dim);
         }
 
+        @media (max-width: 600px) {
+            .hero-body {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .profile-frame {
+                order: -1;
+            }
+        }
+
         /* MAIN */
         .main {
             display: flex;
@@ -878,7 +889,9 @@
             <div class="topbar">
                 <div class="topbar-title">Portfolio</div>
                 <div class="topbar-right">
-                    <div class="pill"><i class="fas fa-circle" style="color:var(--red);font-size:0.5rem"></i> Available
+                    <div class="pill" id="status-pill">
+                        <i class="fas fa-circle" id="status-dot" style="color:#555; font-size:0.5rem"></i>
+                        <span id="status-text">...</span>
                     </div>
                     <a href="contact.html" class="pill"><i class="fas fa-envelope"></i> contact me</a>
                     <div class="icon-btn" id="shareBtn" onclick="copyLink()" title="Copy link">
@@ -1127,6 +1140,39 @@
             }
         }
         loadRecentBlogs();
+
+        const DISCORD_ID = '743795887792193660';
+
+        async function updateStatus() {
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const { data } = await res.json();
+                const status = data.discord_status;
+
+                const dot = document.getElementById('status-dot');
+                const text = document.getElementById('status-text');
+
+                const map = {
+                    online: { label: 'Available', color: '#39FF14', glow: true },
+                    idle: { label: 'Available', color: '#39FF14', glow: false },
+                    dnd: { label: 'Available', color: '#39FF14', glow: false },
+                    offline: { label: 'Offline', color: '#555', glow: false },
+                };
+
+                const s = map[status] || map.offline;
+                dot.style.color = s.color;
+                dot.style.filter = s.glow
+                    ? 'drop-shadow(0 0 4px var(--red))'
+                    : 'none';
+                text.textContent = s.label;
+
+            } catch (e) {
+                document.getElementById('status-text').textContent = 'Available';
+            }
+        }
+
+        updateStatus();
+        setInterval(updateStatus, 30000);
     </script>
 
 </body>
